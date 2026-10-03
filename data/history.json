@@ -1,0 +1,252 @@
+{
+ "results": {
+  "2022": {
+   "Lula": 48.43,
+   "Bolsonaro": 43.2,
+   "Tebet": 4.16,
+   "Ciro": 3.04
+  },
+  "2018": {
+   "Bolsonaro": 46.03,
+   "Haddad": 29.28,
+   "Ciro": 12.47,
+   "Alckmin": 4.76
+  }
+ },
+ "elections": {
+  "2022": [
+   {
+    "institute": "Datafolha",
+    "end": "2022-10-01",
+    "n": 12800.0,
+    "moe": 2.0,
+    "Lula": 48.0,
+    "Bolsonaro": 34.0,
+    "Ciro": 5.0,
+    "Tebet": 6.0,
+    "nominalTotal": 95.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2022-10-01",
+    "n": 3008.0,
+    "moe": 2.0,
+    "Lula": 47.0,
+    "Bolsonaro": 34.0,
+    "Ciro": 5.0,
+    "Tebet": 5.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "Ipespe",
+    "end": "2022-09-30",
+    "n": 1100.0,
+    "moe": 3.0,
+    "Lula": 46.0,
+    "Bolsonaro": 33.0,
+    "Ciro": 7.0,
+    "Tebet": 6.0,
+    "nominalTotal": 94.0
+   },
+   {
+    "institute": "AtlasIntel",
+    "end": "2022-09-30",
+    "n": 4500.0,
+    "moe": 1.0,
+    "Lula": 49.8,
+    "Bolsonaro": 40.7,
+    "Ciro": 3.9,
+    "Tebet": 2.6,
+    "nominalTotal": 98.8
+   },
+   {
+    "institute": "CNT/MDA",
+    "end": "2022-09-30",
+    "n": 2002.0,
+    "moe": 2.2,
+    "Lula": 44.2,
+    "Bolsonaro": 36.3,
+    "Ciro": 4.5,
+    "Tebet": 4.3,
+    "nominalTotal": 91.5
+   },
+   {
+    "institute": "Paraná Pesquisas",
+    "end": "2022-09-29",
+    "n": 2020.0,
+    "moe": 2.2,
+    "Lula": 43.9,
+    "Bolsonaro": 37.3,
+    "Ciro": 4.9,
+    "Tebet": 5.8,
+    "nominalTotal": 93.1
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2022-09-29",
+    "n": 6800.0,
+    "moe": 2.0,
+    "Lula": 48.0,
+    "Bolsonaro": 34.0,
+    "Ciro": 6.0,
+    "Tebet": 5.0,
+    "nominalTotal": 94.0
+   },
+   {
+    "institute": "Veritá",
+    "end": "2022-09-29",
+    "n": 51169.0,
+    "moe": 2.0,
+    "Lula": 41.6,
+    "Bolsonaro": 44.6,
+    "Ciro": 4.1,
+    "Tebet": 4.2,
+    "nominalTotal": 97.6
+   },
+   {
+    "institute": "Brasmarket",
+    "end": "2022-09-28",
+    "n": 1600.0,
+    "moe": 2.45,
+    "Lula": 30.9,
+    "Bolsonaro": 45.4,
+    "Ciro": 6.2,
+    "Tebet": 5.2,
+    "nominalTotal": 89.2
+   },
+   {
+    "institute": "Futura",
+    "end": "2022-09-28",
+    "n": 2000.0,
+    "moe": 2.2,
+    "Lula": 40.7,
+    "Bolsonaro": 37.8,
+    "Ciro": 5.6,
+    "Tebet": 7.2,
+    "nominalTotal": 93.4
+   },
+   {
+    "institute": "AtlasIntel",
+    "end": "2022-09-28",
+    "n": 4500.0,
+    "moe": 1.0,
+    "Lula": 49.3,
+    "Bolsonaro": 39.9,
+    "Ciro": 3.5,
+    "Tebet": 2.5,
+    "nominalTotal": 97.1
+   },
+   {
+    "institute": "Ideia",
+    "end": "2022-09-28",
+    "n": 1500.0,
+    "moe": 3.0,
+    "Lula": 47.0,
+    "Bolsonaro": 37.0,
+    "Ciro": 6.0,
+    "Tebet": 5.0,
+    "nominalTotal": 96.2
+   },
+   {
+    "institute": "PoderData",
+    "end": "2022-09-27",
+    "n": 4500.0,
+    "moe": 1.5,
+    "Lula": 45.0,
+    "Bolsonaro": 36.0,
+    "Ciro": 6.0,
+    "Tebet": 4.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "Quaest",
+    "end": "2022-09-27",
+    "n": 2000.0,
+    "moe": 2.0,
+    "Lula": 46.0,
+    "Bolsonaro": 33.0,
+    "Ciro": 6.0,
+    "Tebet": 5.0,
+    "nominalTotal": 91.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2022-09-26",
+    "n": 3008.0,
+    "moe": 2.0,
+    "Lula": 48.0,
+    "Bolsonaro": 31.0,
+    "Ciro": 6.0,
+    "Tebet": 5.0,
+    "nominalTotal": 92.0
+   },
+   {
+    "institute": "Paraná Pesquisas",
+    "end": "2022-09-26",
+    "n": 2020.0,
+    "moe": 2.2,
+    "Lula": 42.7,
+    "Bolsonaro": 36.4,
+    "Ciro": 5.6,
+    "Tebet": 5.0,
+    "nominalTotal": 90.9
+   },
+   {
+    "institute": "AtlasIntel",
+    "end": "2022-09-26",
+    "n": 4500.0,
+    "moe": 1.0,
+    "Lula": 48.3,
+    "Bolsonaro": 41.0,
+    "Ciro": 3.5,
+    "Tebet": 2.1,
+    "nominalTotal": 97.6
+   },
+   {
+    "institute": "Nexus",
+    "end": "2022-09-25",
+    "n": 2000.0,
+    "moe": 2.0,
+    "Lula": 45.0,
+    "Bolsonaro": 35.0,
+    "Ciro": 7.0,
+    "Tebet": 4.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "Veritá",
+    "end": "2022-09-23",
+    "n": 11000.0,
+    "moe": 2.0,
+    "Lula": 42.1,
+    "Bolsonaro": 43.2,
+    "Ciro": 4.7,
+    "Tebet": 4.0,
+    "nominalTotal": 96.8
+   },
+   {
+    "institute": "Equilíbrio Brasil",
+    "end": "2022-09-22",
+    "n": 11500.0,
+    "moe": 3.0,
+    "Lula": 39.0,
+    "Bolsonaro": 44.0,
+    "Ciro": 5.0,
+    "Tebet": 4.0,
+    "nominalTotal": 95.0
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2022-09-22",
+    "n": 6754.0,
+    "moe": 2.0,
+    "Lula": 47.0,
+    "Bolsonaro": 33.0,
+    "Ciro": 7.0,
+    "Tebet": 5.0,
+    "nominalTotal": 93.0
+   }
+  ],
+  "2018": []
+ }
+}
