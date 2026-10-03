@@ -6,7 +6,7 @@
 Painel pessoal (Lucas e o pai) para acompanhar a eleição presidencial de 2026: pesquisas em votos válidos, previsões e apuração ao vivo do 1º turno (04/10/2026, resultados a partir das 17h de Brasília), comparando a contagem real com o que pesquisas e previsões apontavam. Inspirado no EleiçãoBR (eleicaobr.netlify.app), de forma simplificada. Candidatos acompanhados: Lula, Flávio Bolsonaro, Caiado, Cury, Renan Santos, Zema (+ "Demais").
 
 ## Stack e arquitetura
-- Next.js 16 (App Router, TypeScript, Tailwind v4), hospedagem na Vercel (https://painel-eleicoes-2026.vercel.app, região `gru1` em `vercel.json`; repo privado asclada/painel-eleicoes-2026, push na `master` publica). Sem banco de dados.
+- Next.js 16 (App Router, TypeScript, Tailwind v4), hospedagem na Vercel (https://painel-eleicoes-2026.vercel.app, região `gru1` em `vercel.json`; repo público asclada/painel-eleicoes-2026 (github.com/asclada/painel-eleicoes-2026), push na `master` publica). Sem banco de dados.
 - `src/lib/polls.ts`: lê a seção "Primeiro turno > 2026" da Wikipédia (API `action=parse`, ~5 min de cache em memória), com fallback em `data/polls2026.json`, mais `data/manual-polls.json` para pesquisas ainda não registradas lá. Também lista as pesquisas "aguardando divulgação".
 - `src/lib/model.ts`: votos válidos, média ponderada (recência, margem de erro, amortecimento por instituto), histórico de acerto 2018/2022, institutos "certeiros", previsão com 20 mil simulações.
 - `src/lib/tse.ts` + `src/app/api/apuracao/route.ts`: leitura do JSON público do TSE (o navegador não consegue por CORS). Modos `?env=demo` e `?env=simulado` para testar.

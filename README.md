@@ -2,6 +2,31 @@
 
 Painel pessoal para acompanhar a eleição presidencial de 2026: pesquisas em votos válidos, previsões e apuração ao vivo do 1º turno (04/10/2026), com comparação entre a contagem real e o que as pesquisas/previsões apontavam.
 
+**Site no ar:** https://painel-eleicoes-2026.vercel.app
+
+![Pesquisas: médias A e B e evolução em 90 dias](docs/prints/web-pesquisas.png)
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/prints/celular-previsoes.png" alt="Previsões no celular"></td>
+    <td width="50%"><img src="docs/prints/celular-apuracao-demo.png" alt="Apuração no celular (modo demonstração)"></td>
+  </tr>
+</table>
+
+![Apuração ao vivo: contagem, mapa e tabela por estado (modo demonstração)](docs/prints/web-apuracao-demo.png)
+
+> Os prints da apuração são do modo demonstração (`?env=demo`), com números inventados só para testar a tela. Não são resultados da eleição.
+
+## Stack
+
+- **Site:** Next.js 16 (App Router), TypeScript e Tailwind CSS v4, hospedado na Vercel. Sem banco de dados: a Wikipédia (pesquisas) e o TSE (apuração) são lidos no servidor, com cache.
+- **Cálculos:** média ponderada das pesquisas, nota de acerto dos institutos em 2018 e 2022 e previsão com 20 mil simulações, tudo em TypeScript (`src/lib/model.ts`).
+- **Python (scripts de apoio):** `scripts/build_data.py` monta a base histórica a partir da Wikipédia e `scripts/gen_brazil_map.py` gera o mapa dos estados a partir da malha do IBGE. Rodam na máquina de quem desenvolve, não fazem parte do site em produção.
+
+Projeto pessoal, sem vínculo com nenhum instituto de pesquisa, partido ou campanha.
+
+## Telas
+
 Três telas (Pesquisas e Previsões têm o botão **1º turno / 2º turno**, que usa `?turno=2`; a apuração é só do 1º turno):
 
 | Rota | O que mostra |
