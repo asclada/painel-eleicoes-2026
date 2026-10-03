@@ -42,6 +42,3 @@ next-env.d.ts
 
 .vercel
 .env*
-
-# material interno (prints), fora do GitHub
-/docs/
