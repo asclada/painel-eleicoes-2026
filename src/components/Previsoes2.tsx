@@ -66,7 +66,7 @@ function Card({ badge, title, subtitle, fc, corrPct }: { badge: string; title: s
             </tr>
           </thead>
           <tbody>
-            {(["lula", "flavio"] as const).map((k) => {
+            {(fc.lula >= fc.flavio ? (["lula", "flavio"] as const) : (["flavio", "lula"] as const)).map((k) => {
               const base = k === "lula" ? fc.base : 100 - fc.base;
               const now = k === "lula" ? fc.lula : fc.flavio;
               return (
@@ -84,8 +84,13 @@ function Card({ badge, title, subtitle, fc, corrPct }: { badge: string; title: s
 
       <h3 className="mb-3 mt-6 text-xs font-medium uppercase tracking-wide text-faint">Votos válidos projetados · faixa de 90%</h3>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Side k="lula" value={fc.lula} lo={fc.lo} hi={fc.hi} />
-        <Side k="flavio" value={fc.flavio} lo={100 - fc.hi} hi={100 - fc.lo} />
+        {(fc.lula >= fc.flavio ? (["lula", "flavio"] as const) : (["flavio", "lula"] as const)).map((k) =>
+          k === "lula" ? (
+            <Side key={k} k="lula" value={fc.lula} lo={fc.lo} hi={fc.hi} />
+          ) : (
+            <Side key={k} k="flavio" value={fc.flavio} lo={100 - fc.hi} hi={100 - fc.lo} />
+          ),
+        )}
       </div>
       <p className="mt-5 border-t border-line pt-3 text-xs text-muted">
         {corrPct === 0 ? "Sem correção do viés histórico." : `Com ${corrPct}% do viés histórico das pesquisas somado.`} Margem total de ±{dec(fc.sd * 1.645)} p.p. (90%). A linha clara marca os 50%.

@@ -11,6 +11,9 @@ import { PollsStrip } from "./PollsStrip";
 
 const KEYS = ["lula", "flavio"] as const;
 
+/** Quem está na frente vem primeiro na lista. */
+const byLead = (s: { lula: number; flavio: number }) => (s.lula >= s.flavio ? [...KEYS] : [...KEYS].reverse());
+
 /** Pesquisas de 2º turno (Lula x Flávio): mesma estrutura da tela do 1º turno. */
 export async function Pesquisas2() {
   const e = await getEstimates2();
@@ -45,7 +48,7 @@ export async function Pesquisas2() {
           title="Média de todas as pesquisas"
           subtitle={`${e.general.nPolls} pesquisas · ${e.general.nInstitutes} institutos`}
           shares={e.general.shares}
-          keys={[...KEYS]}
+          keys={byLead(e.general.shares)}
           footer={
             <div className="space-y-1">
               <div><Gap shares={e.general.shares} /> · margem de erro média declarada ±{dec(e.general.avgMoe)} p.p.</div>
@@ -59,7 +62,7 @@ export async function Pesquisas2() {
             title="Média dos institutos mais certeiros"
             subtitle={`${e.certeiros.nPolls} pesquisas · ${names.join(", ")}`}
             shares={e.certeiros.shares}
-            keys={[...KEYS]}
+            keys={byLead(e.certeiros.shares)}
             footer={
               <div className="space-y-1">
                 <div><Gap shares={e.certeiros.shares} /> · margem de erro média declarada ±{dec(e.certeiros.avgMoe)} p.p.</div>
