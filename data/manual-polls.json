@@ -15,5 +15,22 @@
     "outros": null,
     "indecisos": 0.5,
     "published": "2026-10-03"
+  },
+  {
+    "institute": "Datafolha",
+    "start": "2026-10-03",
+    "end": "2026-10-03",
+    "n": 4006,
+    "moe": 2.0,
+    "lula": 45,
+    "flavio": 42,
+    "caiado": 4,
+    "renan": 3,
+    "cury": 3,
+    "zema": 1,
+    "demais": 2,
+    "outros": null,
+    "indecisos": null,
+    "published": "2026-10-03"
   }
 ]

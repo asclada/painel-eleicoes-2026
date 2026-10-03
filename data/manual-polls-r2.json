@@ -9,5 +9,16 @@
     "flavio": 49,
     "indecisos": 1,
     "published": "2026-10-03"
+  },
+  {
+    "institute": "Datafolha",
+    "start": "2026-10-03",
+    "end": "2026-10-03",
+    "n": 4006,
+    "moe": 2.0,
+    "lula": 47,
+    "flavio": 46,
+    "indecisos": 2,
+    "published": "2026-10-03"
   }
 ]
