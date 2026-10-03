@@ -5,8 +5,24 @@ export const CORRECTIONS = [0, 20, 50] as const;
 export const DEFAULT_CORRECTION = 20;
 
 /** Tudo que as telas precisam, calculado no servidor a partir das pesquisas mais recentes. */
-export async function getEstimates(corrPct: number = DEFAULT_CORRECTION) {
-  const { polls, source, fetchedAt, manualCount, pending } = await getPolls();
+const memo1 = new Map<string, Promise<Estimates>>();
+const memo2 = new Map<string, Promise<Estimates2>>();
+
+/** Contas do 1º turno; refeitas só quando alguma pesquisa muda (ou vira o dia). */
+export async function getEstimates(corrPct: number = DEFAULT_CORRECTION): Promise<Estimates> {
+  const r = await getPolls();
+  const key = `${r.version}|${todayBR()}|${corrPct}`;
+  let hit = memo1.get(key);
+  if (!hit) {
+    if (memo1.size > 6) memo1.clear();
+    hit = compute1(r, corrPct);
+    memo1.set(key, hit);
+  }
+  return hit;
+}
+
+async function compute1(r: Awaited<ReturnType<typeof getPolls>>, corrPct: number) {
+  const { polls, source, fetchedAt, manualCount, pending } = r;
   const asOf = todayBR();
   const corr = corrPct / 100;
   const track = trackRecord();
@@ -37,11 +53,23 @@ export async function getEstimates(corrPct: number = DEFAULT_CORRECTION) {
   };
 }
 
-export type Estimates = Awaited<ReturnType<typeof getEstimates>>;
+export type Estimates = Awaited<ReturnType<typeof compute1>>;
 
 /** 2º turno (Lula x Flávio): mesma receita do 1º turno, com histórico de 2018 e 2022. */
-export async function getEstimates2(corrPct: number = DEFAULT_CORRECTION) {
-  const { polls, source, fetchedAt, manualCount } = await getPolls2();
+export async function getEstimates2(corrPct: number = DEFAULT_CORRECTION): Promise<Estimates2> {
+  const r = await getPolls2();
+  const key = `${r.version}|${todayBR()}|${corrPct}`;
+  let hit = memo2.get(key);
+  if (!hit) {
+    if (memo2.size > 6) memo2.clear();
+    hit = compute2(r, corrPct);
+    memo2.set(key, hit);
+  }
+  return hit;
+}
+
+async function compute2(r: Awaited<ReturnType<typeof getPolls2>>, corrPct: number) {
+  const { polls, source, fetchedAt, manualCount } = r;
   const asOf = todayBR();
   const corr = corrPct / 100;
   const track = trackRecord(2);
@@ -61,4 +89,4 @@ export async function getEstimates2(corrPct: number = DEFAULT_CORRECTION) {
   };
 }
 
-export type Estimates2 = Awaited<ReturnType<typeof getEstimates2>>;
+export type Estimates2 = Awaited<ReturnType<typeof compute2>>;

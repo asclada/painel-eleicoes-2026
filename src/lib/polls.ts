@@ -3,6 +3,7 @@ import snapshot from "../../data/polls2026.json";
 import manual from "../../data/manual-polls.json";
 import snapshot2 from "../../data/polls2026_r2.json";
 import manual2 from "../../data/manual-polls-r2.json";
+import { todayBR } from "./model";
 import type { Poll } from "./types";
 
 /**
@@ -14,7 +15,7 @@ const WIKI_API = "https://pt.wikipedia.org/w/api.php";
 const WIKI_PAGE = "Pesquisas_de_opinião_para_a_eleição_presidencial_no_Brasil_em_2026";
 const WIKI_HEADERS = { "User-Agent": "eleicoes-2026-simulacao/1.0 (projeto pessoal, poucas requisições)" };
 
-export const POLLS_REVALIDATE_SECONDS = 300;
+export const POLLS_REVALIDATE_SECONDS = 90;
 
 const MONTHS: Record<string, number> = {
   jan: 1, fev: 2, mar: 3, abr: 4, mai: 5, jun: 6, jul: 7, ago: 8, set: 9, out: 10, nov: 11, dez: 12,
@@ -246,8 +247,10 @@ export interface PollsResult {
   source: "wikipedia" | "snapshot";
   fetchedAt: string;
   manualCount: number;
-  /** pesquisas já registradas/anunciadas cujo resultado ainda não saiu */
+  /** pesquisas anunciadas dos últimos dias cujo resultado ainda não saiu */
   pending: Pending[];
+  /** muda quando alguma pesquisa muda: serve de chave para guardar contas já feitas */
+  version: string;
 }
 
 interface WikiFetch {
@@ -255,24 +258,38 @@ interface WikiFetch {
   pending: Pending[];
   polls2: Poll[] | null;
   at: number;
+  key: string;
 }
-let memo: WikiFetch | null = null;
+
+let parsed: WikiFetch | null = null; // última leitura boa, já interpretada
+let checkedAt = 0;
 let inflight: Promise<WikiFetch> | null = null;
 
 type Section = { index: string; line: string; toclevel: number };
+
+function hash(s: string) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i += 7) h = Math.imul(h ^ s.charCodeAt(i), 16777619);
+  return `${s.length}:${h >>> 0}`;
+}
+
+/**
+ * GET com o cache de dados do Next (compartilhado entre as instâncias da Vercel): devolve na hora a última cópia e
+ * atualiza em segundo plano a cada POLLS_REVALIDATE_SECONDS. Assim nenhuma visita espera a Wikipédia (que leva ~4 s).
+ */
+async function cachedGet<T>(url: string): Promise<T> {
+  const res = await fetch(url, { headers: WIKI_HEADERS, next: { revalidate: POLLS_REVALIDATE_SECONDS } });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return (await res.json()) as T;
+}
 
 /** Baixa só as seções necessárias (a página inteira tem ~2,7 MB). */
 async function fetchWikipedia(): Promise<WikiFetch> {
   const q = (o: Record<string, string>) =>
     `${WIKI_API}?${new URLSearchParams({ action: "parse", page: WIKI_PAGE, format: "json", formatversion: "2", ...o })}`;
-  async function get<T>(url: string): Promise<T> {
-    const res = await fetch(url, { headers: WIKI_HEADERS, cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return (await res.json()) as T;
-  }
-  const sections = (await get<{ parse: { sections: Section[] } }>(q({ prop: "sections" }))).parse.sections;
+  const sections = (await cachedGet<{ parse: { sections: Section[] } }>(q({ prop: "sections" }))).parse.sections;
   const text = async (index: string) =>
-    (await get<{ parse?: { text?: string } }>(q({ prop: "text", section: index }))).parse?.text ?? "";
+    (await cachedGet<{ parse?: { text?: string } }>(q({ prop: "text", section: index }))).parse?.text ?? "";
 
   const first = sections.findIndex((s) => strip(s.line.toLowerCase()) === "primeiro turno" && s.toclevel === 1);
   const sec1 = sections.slice(first + 1).find((s) => s.line === "2026" && s.toclevel === 2);
@@ -284,33 +301,57 @@ async function fetchWikipedia(): Promise<WikiFetch> {
   const sec2 = lf >= 0 ? sections.slice(lf + 1).find((s) => s.line === "2026" && s.toclevel === 3) : undefined;
 
   const [html1, html2] = await Promise.all([text(sec1.index), sec2 ? text(sec2.index).catch(() => "") : Promise.resolve("")]);
+  const key = `${hash(html1)}|${hash(html2)}`;
+  if (parsed && parsed.key === key) return parsed; // a Wikipédia não mudou: não precisa interpretar de novo
+
   const { polls, pending } = parseWikipedia(html1, true);
   if (polls.length < 40) throw new Error(`só ${polls.length} pesquisas lidas`);
   const polls2 = html2 ? parseRound2(html2) : [];
-  return { polls, pending, polls2: polls2.length >= 20 ? polls2 : null, at: Date.now() };
+  return { polls, pending, polls2: polls2.length >= 20 ? polls2 : null, at: Date.now(), key };
 }
 
+const COLD_WAIT_MS = 8_000;
+
 async function loadWiki(): Promise<{ data: WikiFetch | null }> {
-  if (memo && Date.now() - memo.at <= POLLS_REVALIDATE_SECONDS * 1000) return { data: memo };
+  if (parsed && Date.now() - checkedAt < 15_000) return { data: parsed };
+  inflight ??= fetchWikipedia()
+    .then((v) => {
+      parsed = v;
+      checkedAt = Date.now();
+      return v;
+    })
+    .finally(() => (inflight = null));
+  inflight.catch(() => undefined); // evita aviso de erro não tratado se ela falhar depois do tempo de espera
   try {
-    inflight ??= fetchWikipedia().finally(() => (inflight = null));
-    memo = await inflight;
-    return { data: memo };
+    // com algo em memória, espera pouco; sem nada (primeira carga a frio), espera até COLD_WAIT_MS e depois usa a cópia salva
+    // (a leitura continua em segundo plano e a próxima visita já pega o dado novo)
+    const waitMs = parsed ? 1_500 : COLD_WAIT_MS;
+    await Promise.race([inflight, new Promise((resolve) => setTimeout(resolve, waitMs))]);
   } catch (e) {
     console.warn("[polls] Wikipédia falhou:", e instanceof Error ? e.message : e);
-    return { data: memo }; // última leitura boa (se houver)
   }
+  return { data: parsed }; // última leitura boa (se houver)
 }
 
 function mergeManual(base: Poll[], manualList: Poll[]) {
   const manualPolls = manualList.map((p) => ({ ...p, origin: "manual" as const }));
-  const key = (p: Poll) => `${p.institute}|${p.end}|${p.n ?? 0}`;
-  const byKey = new Map(base.map((p) => [key(p), p]));
-  for (const p of manualPolls) byKey.set(key(p), p);
-  const merged = [...byKey.values()].sort((a, b) =>
+  // a lançada à mão substitui a da Wikipédia do mesmo instituto e dia, mesmo que a amostra divirja
+  const replaced = new Set(manualPolls.map((p) => `${p.institute}|${p.end}`));
+  const merged = [...base.filter((p) => !replaced.has(`${p.institute}|${p.end}`)), ...manualPolls].sort((a, b) =>
     a.end < b.end ? 1 : a.end > b.end ? -1 : a.institute.localeCompare(b.institute),
   );
   return { merged, manualCount: manualPolls.length };
+}
+
+const ymd = (d: Date) => d.toISOString().slice(0, 10);
+export function addDays(iso: string, n: number) {
+  return ymd(new Date(Date.parse(`${iso}T12:00:00Z`) + n * 86_400_000));
+}
+
+/** Dia em que a pesquisa foi divulgada: o informado à mão ou, na Wikipédia, o dia seguinte ao fim do campo (nunca depois de hoje). */
+export function publishedOf(p: Poll, today = todayBR()) {
+  const d = p.published ?? addDays(p.end, 1);
+  return d > today ? today : d;
 }
 
 export async function getPolls(): Promise<PollsResult> {
@@ -319,8 +360,13 @@ export async function getPolls(): Promise<PollsResult> {
   const polls = data ? data.polls : (snapshot.polls as Poll[]).map((p) => ({ ...p, origin: "snapshot" as const }));
   const { merged, manualCount } = mergeManual(polls, manual as Poll[]);
   const have = new Set(merged.map((p) => `${p.institute}|${p.end}`));
-  const pending = (data?.pending ?? []).filter((x) => !have.has(`${x.institute}|${x.end}`));
-  return { polls: merged, source, fetchedAt: new Date(data?.at ?? Date.now()).toISOString(), manualCount, pending };
+  // só as anunciadas dos últimos 2 dias: as mais antigas já saíram e a Wikipédia só não preencheu
+  const cutoff = addDays(todayBR(), -2);
+  // some se o instituto já tem pesquisa até 1 dia antes da anunciada (costuma ser a mesma, só repetida na tabela)
+  const covered = (x: Pending) => merged.some((p) => p.institute === x.institute && p.end >= addDays(x.end, -1));
+  const pending = (data?.pending ?? []).filter((x) => !have.has(`${x.institute}|${x.end}`) && !covered(x) && x.end >= cutoff);
+  const version = hash(merged.map((p) => `${p.institute}${p.end}${p.n}${p.lula}${p.flavio}${p.cury}${p.caiado}${p.renan}${p.zema}`).join());
+  return { polls: merged, source, fetchedAt: new Date(data?.at ?? Date.now()).toISOString(), manualCount, pending, version };
 }
 
 export interface Polls2Result {
@@ -328,13 +374,14 @@ export interface Polls2Result {
   source: "wikipedia" | "snapshot";
   fetchedAt: string;
   manualCount: number;
+  version: string;
 }
 
 function fillRound2(p: Partial<Poll>): Poll {
   return {
     institute: p.institute ?? "", start: p.start ?? p.end ?? "", end: p.end ?? "", n: p.n ?? null, moe: p.moe ?? null,
     lula: p.lula ?? null, flavio: p.flavio ?? null, cury: null, caiado: null, renan: null, zema: null,
-    demais: null, outros: null, indecisos: p.indecisos ?? null,
+    demais: null, outros: null, indecisos: p.indecisos ?? null, published: p.published,
   };
 }
 
@@ -344,5 +391,6 @@ export async function getPolls2(): Promise<Polls2Result> {
   const live = data?.polls2 ?? null;
   const base = live ?? (snapshot2.polls as Partial<Poll>[]).map((p) => ({ ...fillRound2(p), origin: "snapshot" as const }));
   const { merged, manualCount } = mergeManual(base, (manual2 as Partial<Poll>[]).map(fillRound2));
-  return { polls: merged, source: live ? "wikipedia" : "snapshot", fetchedAt: new Date(data?.at ?? Date.now()).toISOString(), manualCount };
+  const version = hash(merged.map((p) => `${p.institute}${p.end}${p.n}${p.lula}${p.flavio}`).join());
+  return { polls: merged, source: live ? "wikipedia" : "snapshot", fetchedAt: new Date(data?.at ?? Date.now()).toISOString(), manualCount, version };
 }

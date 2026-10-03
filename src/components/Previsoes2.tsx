@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CandidateAvatar } from "./CandidateAvatar";
 import { Method } from "./Method";
 import { PageHeader } from "./PageHeader";
+import { PollsStrip } from "./PollsStrip";
 
 const SCALE_MIN = 40;
 const SCALE_MAX = 60;
@@ -107,6 +108,8 @@ export async function Previsoes2({ corrPct }: { corrPct: number }) {
         keep={keep}
         source={e.source}
       />
+
+      <PollsStrip />
 
       <div className="card flex flex-wrap items-center justify-between gap-3 p-4 text-sm">
         <div className="max-w-xl text-muted">

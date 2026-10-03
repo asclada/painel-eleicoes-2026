@@ -5,6 +5,7 @@ import { HALF_LIFE_DAYS, validShares, WINDOW_DAYS } from "@/lib/model";
 import { Gap, SharesCard } from "@/components/SharesCard";
 import { Trend } from "@/components/Trend";
 import { PageHeader } from "@/components/PageHeader";
+import { PollsStrip } from "@/components/PollsStrip";
 import { Pesquisas2 } from "@/components/Pesquisas2";
 import { Method } from "@/components/Method";
 import { CandidateAvatar } from "@/components/CandidateAvatar";
@@ -35,17 +36,7 @@ export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
         source={e.source}
       />
 
-      {e.pending.length > 0 && (
-        <div className="card flex flex-wrap items-center gap-x-3 gap-y-1.5 p-3 text-sm text-muted">
-          <span className="font-medium text-fg">Aguardando divulgação:</span>
-          {[...new Map(e.pending.map((x) => [`${x.institute}${x.end}`, x])).values()].map((x) => (
-            <span key={`${x.institute}${x.end}`} className="rounded-full border border-line bg-[#0f1630] px-2.5 py-0.5 text-xs">
-              {x.institute} · {dmy(x.end)}
-            </span>
-          ))}
-          <span className="text-xs text-faint">As médias se atualizam sozinhas quando saem (leitura a cada 5 min).</span>
-        </div>
-      )}
+      <PollsStrip />
 
       <div className="grid gap-4 md:grid-cols-2">
         <SharesCard

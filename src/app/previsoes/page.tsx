@@ -4,6 +4,7 @@ import { dec } from "@/lib/format";
 import { ForecastCard } from "@/components/ForecastCard";
 import { Method } from "@/components/Method";
 import { PageHeader } from "@/components/PageHeader";
+import { PollsStrip } from "@/components/PollsStrip";
 import { Previsoes2 } from "@/components/Previsoes2";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +27,8 @@ export default async function PrevisoesPage({ searchParams }: PageProps<"/previs
         keep={corrPct === DEFAULT_CORRECTION ? undefined : { corr: String(corrPct) }}
         source={e.source}
       />
+
+      <PollsStrip />
 
       <div className="card flex flex-wrap items-center justify-between gap-3 p-4 text-sm">
         <div className="max-w-xl text-muted">

@@ -7,6 +7,7 @@ import { Gap, SharesCard } from "./SharesCard";
 import { Trend } from "./Trend";
 import { Method } from "./Method";
 import { PageHeader } from "./PageHeader";
+import { PollsStrip } from "./PollsStrip";
 
 const KEYS = ["lula", "flavio"] as const;
 
@@ -30,6 +31,8 @@ export async function Pesquisas2() {
         basePath="/"
         source={e.source}
       />
+
+      <PollsStrip />
 
       <div className="card p-3 text-sm text-muted">
         São pesquisas do tipo “se o 2º turno fosse hoje”, feitas antes de saber quem passa. Depois do 1º turno de domingo, as novas pesquisas passam a

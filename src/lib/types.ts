@@ -29,6 +29,8 @@ export interface Poll {
   demais: number | null;
   outros: number | null;
   indecisos: number | null;
+  /** dia da divulgação (yyyy-mm-dd), quando conhecido */
+  published?: string;
   origin?: "wikipedia" | "manual" | "snapshot";
 }
 
