@@ -15,7 +15,7 @@ export function UfTable({ counts }: { counts: UfCounts | null }) {
             <th className="py-2 pr-2 text-right font-medium">Apurado</th>
             <th className="py-2 pr-2 text-right font-medium" style={{ color: BY_KEY.lula.color }}>Lula</th>
             <th className="py-2 pr-2 text-right font-medium" style={{ color: BY_KEY.flavio.color }}>Flávio</th>
-            <th className="py-2 text-left font-medium">Na frente</th>
+            <th className="border-l border-line py-2 pl-3 text-left font-medium">Na frente</th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@ export function UfTable({ counts }: { counts: UfCounts | null }) {
                 <td className="num py-1.5 pr-2 text-right text-muted">{c ? pct(c.pctSections, 0) : "—"}</td>
                 <td className="num py-1.5 pr-2 text-right">{l && c ? pct(c.shares.lula) : "—"}</td>
                 <td className="num py-1.5 pr-2 text-right">{l && c ? pct(c.shares.flavio) : "—"}</td>
-                <td className="py-1.5">
+                <td className="border-l border-line py-1.5 pl-3">
                   {l ? (
                     <span className="flex items-center gap-1.5">
                       <CandidateAvatar k={l.key} size={18} />

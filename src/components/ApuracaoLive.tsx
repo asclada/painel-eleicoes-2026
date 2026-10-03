@@ -82,7 +82,7 @@ export function ApuracaoLive({ env, sources }: { env: Env; sources: LiveSource[]
           {env === "demo" && (
             <label className="ml-auto flex items-center gap-3 text-xs text-muted">
               % apurado: <strong className="num text-fg">{demoP}%</strong>
-              <input type="range" min={0} max={100} value={demoP} onChange={(e) => setDemoP(Number(e.target.value))} className="w-40 accent-[#6aa7ff]" aria-label="Percentual apurado na demonstração" />
+              <input type="range" min={0} max={100} value={demoP} onChange={(e) => setDemoP(Number(e.target.value))} className="w-40 accent-[#a78bfa]" aria-label="Percentual apurado na demonstração" />
             </label>
           )}
         </div>
@@ -103,7 +103,7 @@ export function ApuracaoLive({ env, sources }: { env: Env; sources: LiveSource[]
           </div>
         </div>
         <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#1c2650]" role="progressbar" aria-valuenow={data?.pctSections ?? 0} aria-valuemin={0} aria-valuemax={100} aria-label="Seções apuradas">
-          <div className="h-full rounded-full bg-accent transition-all duration-700" style={{ width: `${data?.pctSections ?? 0}%` }} />
+          <div className="h-full rounded-full bg-[#a78bfa] transition-all duration-700" style={{ width: `${data?.pctSections ?? 0}%` }} />
         </div>
 
         {err && (
