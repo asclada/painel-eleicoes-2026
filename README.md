@@ -112,3 +112,7 @@ vercel --prod
 ```
 
 `vercel.json` fixa a região de execução em `gru1` (São Paulo). Depois do deploy, abra `/api/apuracao` para confirmar que o servidor consegue ler o TSE.
+
+## Licença
+
+Código sob a licença [MIT](LICENSE). As fotos dos candidatos em `public/candidatos/` são as oficiais divulgadas pelo TSE e não fazem parte da licença do código.
