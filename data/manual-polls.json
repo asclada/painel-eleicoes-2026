@@ -32,5 +32,39 @@
     "outros": null,
     "indecisos": null,
     "published": "2026-10-03"
+  },
+  {
+    "institute": "Quaest",
+    "start": "2026-10-02",
+    "end": "2026-10-03",
+    "n": 3702,
+    "moe": 2.0,
+    "lula": 46,
+    "flavio": 45,
+    "cury": 3,
+    "caiado": 3,
+    "renan": 3,
+    "zema": 0,
+    "demais": 0,
+    "outros": null,
+    "indecisos": null,
+    "published": "2026-10-03"
+  },
+  {
+    "institute": "Futura",
+    "start": "2026-09-29",
+    "end": "2026-10-03",
+    "n": 2000,
+    "moe": 2.2,
+    "lula": 42.6,
+    "flavio": 44.8,
+    "cury": 4.1,
+    "caiado": 3.9,
+    "renan": 2.8,
+    "zema": 0.8,
+    "demais": 1.0,
+    "outros": null,
+    "indecisos": null,
+    "published": "2026-10-03"
   }
 ]
