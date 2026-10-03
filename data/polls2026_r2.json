@@ -1,0 +1,1486 @@
+{
+ "source": "Wikipédia (pt) – Lula x Flávio, 2º turno",
+ "generatedAt": "2026-10-03",
+ "polls": [
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-09-29",
+   "end": "2026-10-01",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 45.2,
+   "flavio": 48.2,
+   "indecisos": 6.6
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-09-28",
+   "end": "2026-10-01",
+   "n": 2002,
+   "moe": 2.0,
+   "lula": 48.0,
+   "flavio": 45.0,
+   "indecisos": 7.0
+  },
+  {
+   "institute": "Real Time Big Data",
+   "start": "2026-09-26",
+   "end": "2026-09-30",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 46.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "DataTrends",
+   "start": "2026-09-28",
+   "end": "2026-09-30",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 45.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Indexa",
+   "start": "2026-09-27",
+   "end": "2026-09-29",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 43.0,
+   "flavio": 42.0,
+   "indecisos": 15.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-09-25",
+   "end": "2026-09-29",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 43.5,
+   "flavio": 49.0,
+   "indecisos": 7.5
+  },
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-09-26",
+   "end": "2026-09-28",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 44.7,
+   "flavio": 45.2,
+   "indecisos": 10.1
+  },
+  {
+   "institute": "Palver",
+   "start": "2026-09-24",
+   "end": "2026-09-28",
+   "n": 5000,
+   "moe": 2.4,
+   "lula": 45.0,
+   "flavio": 47.0,
+   "indecisos": 8.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-09-25",
+   "end": "2026-09-28",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 48.5,
+   "flavio": 48.0,
+   "indecisos": 3.6
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-09-24",
+   "end": "2026-09-28",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 43.0,
+   "flavio": 50.0,
+   "indecisos": 6.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-09-23",
+   "end": "2026-09-28",
+   "n": 5005,
+   "moe": 1.0,
+   "lula": 47.6,
+   "flavio": 47.7,
+   "indecisos": 4.8
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-09-24",
+   "end": "2026-09-27",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 42.0,
+   "flavio": 42.0,
+   "indecisos": 16.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-09-25",
+   "end": "2026-09-27",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 44.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-09-22",
+   "end": "2026-09-24",
+   "n": 2002,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 45.0,
+   "indecisos": 8.0
+  },
+  {
+   "institute": "Real Time Big Data",
+   "start": "2026-09-19",
+   "end": "2026-09-23",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 44.0,
+   "flavio": 45.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-09-20",
+   "end": "2026-09-23",
+   "n": 3000,
+   "moe": 1.8,
+   "lula": 45.0,
+   "flavio": 46.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Palver",
+   "start": "2026-09-20",
+   "end": "2026-09-23",
+   "n": 3000,
+   "moe": 1.8,
+   "lula": 45.0,
+   "flavio": 48.0,
+   "indecisos": 7.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-09-19",
+   "end": "2026-09-23",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 43.7,
+   "flavio": 49.4,
+   "indecisos": 11.2
+  },
+  {
+   "institute": "Alfa Inteligência",
+   "start": "2026-09-18",
+   "end": "2026-09-23",
+   "n": 2700,
+   "moe": 1.8,
+   "lula": 43.0,
+   "flavio": 43.0,
+   "indecisos": 14.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-09-17",
+   "end": "2026-09-22",
+   "n": 5015,
+   "moe": 1.0,
+   "lula": 47.7,
+   "flavio": 47.4,
+   "indecisos": 4.9
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-09-17",
+   "end": "2026-09-20",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 41.0,
+   "flavio": 42.0,
+   "indecisos": 17.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-09-18",
+   "end": "2026-09-20",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 45.0,
+   "indecisos": 8.0
+  },
+  {
+   "institute": "American Analytics",
+   "start": "2026-09-15",
+   "end": "2026-09-20",
+   "n": 2000,
+   "moe": 2.5,
+   "lula": 43.0,
+   "flavio": 43.0,
+   "indecisos": 14.0
+  },
+  {
+   "institute": "Palver",
+   "start": "2026-09-15",
+   "end": "2026-09-18",
+   "n": 5000,
+   "moe": 2.8,
+   "lula": 43.0,
+   "flavio": 47.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-09-13",
+   "end": "2026-09-16",
+   "n": 3000,
+   "moe": 1.8,
+   "lula": 44.0,
+   "flavio": 46.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-09-14",
+   "end": "2026-09-16",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 43.0,
+   "flavio": 50.0,
+   "indecisos": 7.0
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-09-15",
+   "end": "2026-09-16",
+   "n": 2002,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 44.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-09-11",
+   "end": "2026-09-16",
+   "n": 5018,
+   "moe": 1.0,
+   "lula": 46.8,
+   "flavio": 47.2,
+   "indecisos": 6.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-09-11",
+   "end": "2026-09-15",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 43.7,
+   "flavio": 48.1,
+   "indecisos": 8.2
+  },
+  {
+   "institute": "DataTrends",
+   "start": "2026-09-12",
+   "end": "2026-09-14",
+   "n": 2000,
+   "moe": 2.19,
+   "lula": 44.0,
+   "flavio": 45.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-09-10",
+   "end": "2026-09-13",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 40.0,
+   "flavio": 42.0,
+   "indecisos": 18.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-09-11",
+   "end": "2026-09-13",
+   "n": 2003,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 46.0,
+   "indecisos": 7.0
+  },
+  {
+   "institute": "Indexa",
+   "start": "2026-09-10",
+   "end": "2026-09-13",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 43.0,
+   "flavio": 42.0,
+   "indecisos": 15.0
+  },
+  {
+   "institute": "CNT/MDA",
+   "start": "2026-09-09",
+   "end": "2026-09-13",
+   "n": 2002,
+   "moe": 2.2,
+   "lula": 47.3,
+   "flavio": 40.0,
+   "indecisos": 12.7
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-09-08",
+   "end": "2026-09-11",
+   "n": 2002,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 44.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-09-04",
+   "end": "2026-09-10",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 45.0,
+   "flavio": 45.4,
+   "indecisos": 9.6
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-09-06",
+   "end": "2026-09-09",
+   "n": 3000,
+   "moe": 1.8,
+   "lula": 45.0,
+   "flavio": 47.0,
+   "indecisos": 8.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-09-04",
+   "end": "2026-09-09",
+   "n": 5000,
+   "moe": 1.0,
+   "lula": 46.2,
+   "flavio": 46.4,
+   "indecisos": 7.4
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-09-03",
+   "end": "2026-09-08",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 40.0,
+   "flavio": 47.0,
+   "indecisos": 14.0
+  },
+  {
+   "institute": "Palver",
+   "start": "2026-09-04",
+   "end": "2026-09-07",
+   "n": 5000,
+   "moe": 3.0,
+   "lula": 44.0,
+   "flavio": 46.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-09-04",
+   "end": "2026-09-07",
+   "n": 2002,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 46.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-09-04",
+   "end": "2026-09-07",
+   "n": 1500,
+   "moe": 2.5,
+   "lula": 46.0,
+   "flavio": 46.0,
+   "indecisos": 8.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-09-03",
+   "end": "2026-09-06",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 41.0,
+   "flavio": 41.0,
+   "indecisos": 18.0
+  },
+  {
+   "institute": "Veritá",
+   "start": "2026-09-01",
+   "end": "2026-09-04",
+   "n": 3804,
+   "moe": 2.0,
+   "lula": 43.1,
+   "flavio": 48.5,
+   "indecisos": 8.5
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-08-30",
+   "end": "2026-09-02",
+   "n": 3000,
+   "moe": 1.8,
+   "lula": 45.0,
+   "flavio": 46.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-09-01",
+   "end": "2026-09-02",
+   "n": 2002,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 44.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-08-30",
+   "end": "2026-09-01",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 42.0,
+   "flavio": 41.0,
+   "indecisos": 17.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-08-27",
+   "end": "2026-09-01",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 45.6,
+   "flavio": 45.2,
+   "indecisos": 9.2
+  },
+  {
+   "institute": "Real Time Big Data",
+   "start": "2026-08-27",
+   "end": "2026-08-31",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 44.0,
+   "flavio": 44.0,
+   "indecisos": 12.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-08-28",
+   "end": "2026-08-30",
+   "n": 2005,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 45.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-08-25",
+   "end": "2026-08-30",
+   "n": 5014,
+   "moe": 2.0,
+   "lula": 47.1,
+   "flavio": 42.6,
+   "indecisos": 10.3
+  },
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-08-25",
+   "end": "2026-08-27",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 44.5,
+   "flavio": 45.1,
+   "indecisos": 10.4
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-08-23",
+   "end": "2026-08-26",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 44.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-08-21",
+   "end": "2026-08-25",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 42.0,
+   "flavio": 47.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-08-21",
+   "end": "2026-08-23",
+   "n": 2006,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 45.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Indexa",
+   "start": "2026-08-20",
+   "end": "2026-08-23",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 46.0,
+   "flavio": 41.0,
+   "indecisos": 13.0
+  },
+  {
+   "institute": "Veritá",
+   "start": "2026-08-16",
+   "end": "2026-08-20",
+   "n": 3840,
+   "moe": 2.0,
+   "lula": 42.0,
+   "flavio": 47.3,
+   "indecisos": 10.7
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-08-18",
+   "end": "2026-08-20",
+   "n": 2058,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 43.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-08-14",
+   "end": "2026-08-16",
+   "n": 2003,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 44.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-08-10",
+   "end": "2026-08-13",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 43.0,
+   "flavio": 40.0,
+   "indecisos": 17.0
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-08-09",
+   "end": "2026-08-12",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 45.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-08-06",
+   "end": "2026-08-10",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 43.0,
+   "flavio": 45.0,
+   "indecisos": 12.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-08-07",
+   "end": "2026-08-09",
+   "n": 2001,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 44.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "CNT/MDA",
+   "start": "2026-08-05",
+   "end": "2026-08-09",
+   "n": 2002,
+   "moe": 2.2,
+   "lula": 48.0,
+   "flavio": 39.1,
+   "indecisos": 12.9
+  },
+  {
+   "institute": "Palver",
+   "start": "2026-08-03",
+   "end": "2026-08-07",
+   "n": 5000,
+   "moe": 3.0,
+   "lula": 46.0,
+   "flavio": 46.0,
+   "indecisos": 8.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-08-03",
+   "end": "2026-08-07",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 46.5,
+   "flavio": 44.0,
+   "indecisos": 9.5
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-07-31",
+   "end": "2026-08-03",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 44.0,
+   "flavio": 39.0,
+   "indecisos": 17.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-07-31",
+   "end": "2026-08-03",
+   "n": 1500,
+   "moe": 2.5,
+   "lula": 48.5,
+   "flavio": 43.0,
+   "indecisos": 8.5
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-07-31",
+   "end": "2026-08-02",
+   "n": 2002,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 45.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-07-26",
+   "end": "2026-07-28",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 47.5,
+   "flavio": 41.1,
+   "indecisos": 11.4
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-07-26",
+   "end": "2026-07-28",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 43.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Alfa Inteligência",
+   "start": "2026-07-23",
+   "end": "2026-07-28",
+   "n": 2700,
+   "moe": 1.8,
+   "lula": 48.0,
+   "flavio": 41.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-07-22",
+   "end": "2026-07-27",
+   "n": 5021,
+   "moe": 1.0,
+   "lula": 49.2,
+   "flavio": 42.9,
+   "indecisos": 7.9
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-07-24",
+   "end": "2026-07-26",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 43.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-07-22",
+   "end": "2026-07-24",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 48.0,
+   "flavio": 43.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Real Time Big Data",
+   "start": "2026-07-18",
+   "end": "2026-07-20",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 42.0,
+   "indecisos": 13.0
+  },
+  {
+   "institute": "Indexa",
+   "start": "2026-07-16",
+   "end": "2026-07-19",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 46.0,
+   "flavio": 39.0,
+   "indecisos": 15.0
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-07-15",
+   "end": "2026-07-17",
+   "n": 2000,
+   "moe": 2.19,
+   "lula": 45.0,
+   "flavio": 46.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-07-12",
+   "end": "2026-07-15",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 43.0,
+   "indecisos": 12.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-07-10",
+   "end": "2026-07-13",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 37.0,
+   "indecisos": 18.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-07-10",
+   "end": "2026-07-12",
+   "n": 2003,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 44.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-07-07",
+   "end": "2026-07-11",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 46.3,
+   "flavio": 46.1,
+   "indecisos": 7.6
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-07-03",
+   "end": "2026-07-07",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 42.0,
+   "flavio": 45.0,
+   "indecisos": 13.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-07-03",
+   "end": "2026-07-06",
+   "n": 2000,
+   "moe": 2.5,
+   "lula": 45.0,
+   "flavio": 40.0,
+   "indecisos": 15.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-06-26",
+   "end": "2026-06-30",
+   "n": 4999,
+   "moe": 1.0,
+   "lula": 48.8,
+   "flavio": 42.3,
+   "indecisos": 8.9
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-06-26",
+   "end": "2026-06-28",
+   "n": 2009,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 44.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-06-23",
+   "end": "2026-06-25",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 45.3,
+   "flavio": 42.8,
+   "indecisos": 11.9
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-06-21",
+   "end": "2026-06-24",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 43.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Indexa",
+   "start": "2026-06-18",
+   "end": "2026-06-20",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 47.0,
+   "flavio": 40.0,
+   "indecisos": 13.0
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-06-15",
+   "end": "2026-06-20",
+   "n": 2000,
+   "moe": 2.19,
+   "lula": 40.0,
+   "flavio": 42.0,
+   "indecisos": 18.3
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-06-17",
+   "end": "2026-06-19",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 43.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "American Analytics",
+   "start": "2026-06-11",
+   "end": "2026-06-15",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 45.0,
+   "flavio": 40.0,
+   "indecisos": 15.0
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-06-12",
+   "end": "2026-06-14",
+   "n": 2017,
+   "moe": 2.0,
+   "lula": 49.0,
+   "flavio": 43.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "CNT/MDA",
+   "start": "2026-06-10",
+   "end": "2026-06-14",
+   "n": 2002,
+   "moe": 2.2,
+   "lula": 49.3,
+   "flavio": 36.8,
+   "indecisos": 13.9
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-06-08",
+   "end": "2026-06-12",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 48.1,
+   "flavio": 42.9,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Alfa Inteligência",
+   "start": "2026-06-05",
+   "end": "2026-06-10",
+   "n": 1400,
+   "moe": 2.6,
+   "lula": 44.0,
+   "flavio": 41.0,
+   "indecisos": 15.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-06-05",
+   "end": "2026-06-08",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 44.0,
+   "flavio": 38.0,
+   "indecisos": 18.0
+  },
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-06-01",
+   "end": "2026-06-06",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 47.8,
+   "flavio": 41.3,
+   "indecisos": 10.9
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-06-02",
+   "end": "2026-06-05",
+   "n": 2000,
+   "moe": 2.24,
+   "lula": 39.1,
+   "flavio": 44.7,
+   "indecisos": 16.2
+  },
+  {
+   "institute": "Real Time Big Data",
+   "start": "2026-05-29",
+   "end": "2026-05-30",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 40.0,
+   "indecisos": 15.0
+  },
+  {
+   "institute": "PoderData",
+   "start": "2026-05-25",
+   "end": "2026-05-28",
+   "n": 2400,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 42.0,
+   "indecisos": 12.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-05-23",
+   "end": "2026-05-27",
+   "n": 1500,
+   "moe": 2.5,
+   "lula": 46.5,
+   "flavio": 41.4,
+   "indecisos": 12.2
+  },
+  {
+   "institute": "Veritá",
+   "start": "2026-05-22",
+   "end": "2026-05-26",
+   "n": 3330,
+   "moe": 2.0,
+   "lula": 46.8,
+   "flavio": 53.2,
+   "indecisos": null
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-05-22",
+   "end": "2026-05-24",
+   "n": 2045,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 43.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Indexa",
+   "start": "2026-05-22",
+   "end": "2026-05-24",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 46.0,
+   "flavio": 41.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-05-18",
+   "end": "2026-05-21",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 44.0,
+   "flavio": 47.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-05-20",
+   "end": "2026-05-21",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 47.0,
+   "flavio": 43.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-05-15",
+   "end": "2026-05-20",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 47.7,
+   "flavio": 42.2,
+   "indecisos": 10.2
+  },
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-05-17",
+   "end": "2026-05-19",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 46.8,
+   "flavio": 38.1,
+   "indecisos": 15.1
+  },
+  {
+   "institute": "Vetor/Arrow",
+   "start": "2026-05-15",
+   "end": "2026-05-18",
+   "n": 9000,
+   "moe": 1.0,
+   "lula": 50.7,
+   "flavio": 38.3,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-05-13",
+   "end": "2026-05-18",
+   "n": 5032,
+   "moe": 1.0,
+   "lula": 48.9,
+   "flavio": 41.8,
+   "indecisos": 9.3
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-05-12",
+   "end": "2026-05-14",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 45.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Vox Brasil",
+   "start": "2026-05-09",
+   "end": "2026-05-12",
+   "n": 2100,
+   "moe": 2.15,
+   "lula": 40.2,
+   "flavio": 43.8,
+   "indecisos": 16.0
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-05-08",
+   "end": "2026-05-12",
+   "n": 2000,
+   "moe": 2.24,
+   "lula": 43.0,
+   "flavio": 50.0,
+   "indecisos": 7.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-05-08",
+   "end": "2026-05-11",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 42.0,
+   "flavio": 41.0,
+   "indecisos": 17.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-05-04",
+   "end": "2026-05-08",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 44.4,
+   "flavio": 46.9,
+   "indecisos": 8.6
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-05-01",
+   "end": "2026-05-05",
+   "n": 1500,
+   "moe": 2.5,
+   "lula": 44.7,
+   "flavio": 45.3,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Real Time Big Data",
+   "start": "2026-05-02",
+   "end": "2026-05-04",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 43.0,
+   "flavio": 44.0,
+   "indecisos": 13.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-04-22",
+   "end": "2026-04-27",
+   "n": 5008,
+   "moe": 1.0,
+   "lula": 47.5,
+   "flavio": 47.8,
+   "indecisos": 4.7
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-04-24",
+   "end": "2026-04-26",
+   "n": 2028,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 45.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-04-09",
+   "end": "2026-04-13",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 40.0,
+   "flavio": 42.0,
+   "indecisos": 18.0
+  },
+  {
+   "institute": "CNT/MDA",
+   "start": "2026-04-08",
+   "end": "2026-04-12",
+   "n": 2002,
+   "moe": 2.2,
+   "lula": 44.9,
+   "flavio": 40.2,
+   "indecisos": 14.9
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-04-07",
+   "end": "2026-04-11",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 42.6,
+   "flavio": 48.0,
+   "indecisos": 9.4
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-04-07",
+   "end": "2026-04-09",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 46.0,
+   "indecisos": 9.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-03-03",
+   "end": "2026-04-07",
+   "n": 1500,
+   "moe": 2.5,
+   "lula": 45.5,
+   "flavio": 45.8,
+   "indecisos": 8.7
+  },
+  {
+   "institute": "Veritá",
+   "start": "2026-03-13",
+   "end": "2026-04-04",
+   "n": 40500,
+   "moe": 1.0,
+   "lula": 38.4,
+   "flavio": 42.8,
+   "indecisos": 23.2
+  },
+  {
+   "institute": "Nexus",
+   "start": "2026-03-27",
+   "end": "2026-03-29",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 46.0,
+   "indecisos": 7.0
+  },
+  {
+   "institute": "Paraná Pesquisas",
+   "start": "2026-03-25",
+   "end": "2026-03-28",
+   "n": 2080,
+   "moe": 2.2,
+   "lula": 44.1,
+   "flavio": 45.2,
+   "indecisos": 10.7
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-03-20",
+   "end": "2026-03-25",
+   "n": 2000,
+   "moe": 2.24,
+   "lula": 45.0,
+   "flavio": 48.0,
+   "indecisos": 8.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-03-18",
+   "end": "2026-03-23",
+   "n": 5028,
+   "moe": 1.0,
+   "lula": 46.6,
+   "flavio": 47.6,
+   "indecisos": 5.8
+  },
+  {
+   "institute": "Alfa Inteligência",
+   "start": "2026-03-06",
+   "end": "2026-03-11",
+   "n": 1000,
+   "moe": 3.1,
+   "lula": 41.0,
+   "flavio": 38.0,
+   "indecisos": 21.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-03-06",
+   "end": "2026-03-10",
+   "n": 1500,
+   "moe": 2.5,
+   "lula": 47.0,
+   "flavio": 45.0,
+   "indecisos": 7.0
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-03-06",
+   "end": "2026-03-09",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 41.0,
+   "flavio": 41.0,
+   "indecisos": 18.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-03-02",
+   "end": "2026-03-06",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 40.5,
+   "flavio": 48.8,
+   "indecisos": 10.7
+  },
+  {
+   "institute": "Datafolha",
+   "start": "2026-03-03",
+   "end": "2026-03-05",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 46.0,
+   "flavio": 43.0,
+   "indecisos": 11.0
+  },
+  {
+   "institute": "Vetor/Arrow",
+   "start": "2026-02-27",
+   "end": "2026-03-02",
+   "n": 9000,
+   "moe": 1.3,
+   "lula": 40.4,
+   "flavio": 49.0,
+   "indecisos": 10.5
+  },
+  {
+   "institute": "Real Time Big Data",
+   "start": "2026-02-28",
+   "end": "2026-03-02",
+   "n": 2000,
+   "moe": 2.0,
+   "lula": 42.0,
+   "flavio": 41.0,
+   "indecisos": 17.0
+  },
+  {
+   "institute": "Paraná Pesquisas",
+   "start": "2026-02-22",
+   "end": "2026-02-25",
+   "n": 2080,
+   "moe": 2.2,
+   "lula": 43.8,
+   "flavio": 44.4,
+   "indecisos": 11.9
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-02-19",
+   "end": "2026-02-24",
+   "n": 4986,
+   "moe": 1.0,
+   "lula": 46.2,
+   "flavio": 46.3,
+   "indecisos": 7.5
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-02-05",
+   "end": "2026-02-09",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 43.0,
+   "flavio": 38.0,
+   "indecisos": 19.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-02-03",
+   "end": "2026-02-07",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 42.4,
+   "flavio": 48.2,
+   "indecisos": 9.4
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-01-30",
+   "end": "2026-02-02",
+   "n": 1500,
+   "moe": 2.5,
+   "lula": 45.8,
+   "flavio": 41.1,
+   "indecisos": 13.1
+  },
+  {
+   "institute": "Gerp",
+   "start": "2026-01-28",
+   "end": "2026-02-02",
+   "n": 2000,
+   "moe": 2.24,
+   "lula": 45.0,
+   "flavio": 45.0,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Paraná Pesquisas",
+   "start": "2026-01-25",
+   "end": "2026-01-28",
+   "n": 2080,
+   "moe": 2.2,
+   "lula": 44.8,
+   "flavio": 42.2,
+   "indecisos": 13.0
+  },
+  {
+   "institute": "AtlasIntel",
+   "start": "2026-01-15",
+   "end": "2026-01-20",
+   "n": 5418,
+   "moe": 1.0,
+   "lula": 49.0,
+   "flavio": 45.0,
+   "indecisos": 6.0
+  },
+  {
+   "institute": "Futura",
+   "start": "2026-01-15",
+   "end": "2026-01-19",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 41.9,
+   "flavio": 48.1,
+   "indecisos": 10.0
+  },
+  {
+   "institute": "Ideia",
+   "start": "2026-01-08",
+   "end": "2026-01-12",
+   "n": 2000,
+   "moe": 2.2,
+   "lula": 46.2,
+   "flavio": 36.0,
+   "indecisos": 17.8
+  },
+  {
+   "institute": "Quaest",
+   "start": "2026-01-08",
+   "end": "2026-01-11",
+   "n": 2004,
+   "moe": 2.0,
+   "lula": 45.0,
+   "flavio": 38.0,
+   "indecisos": 17.0
+  }
+ ]
+}

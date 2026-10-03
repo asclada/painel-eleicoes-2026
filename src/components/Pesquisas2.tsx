@@ -1,51 +1,40 @@
-import { CANDIDATES } from "@/lib/candidates";
-import { getEstimates } from "@/lib/estimates";
+import { getEstimates2 } from "@/lib/estimates";
 import { dec, dmy, int, pct } from "@/lib/format";
 import { HALF_LIFE_DAYS, validShares, WINDOW_DAYS } from "@/lib/model";
-import { Gap, SharesCard } from "@/components/SharesCard";
-import { Trend } from "@/components/Trend";
-import { PageHeader } from "@/components/PageHeader";
-import { Pesquisas2 } from "@/components/Pesquisas2";
-import { Method } from "@/components/Method";
-import { CandidateAvatar } from "@/components/CandidateAvatar";
+import { BY_KEY } from "@/lib/candidates";
+import { CandidateAvatar } from "./CandidateAvatar";
+import { Gap, SharesCard } from "./SharesCard";
+import { Trend } from "./Trend";
+import { Method } from "./Method";
+import { PageHeader } from "./PageHeader";
 
-// renderiza a cada acesso; a leitura da Wikipédia tem cache próprio de 5 min em memória (src/lib/polls.ts)
-export const dynamic = "force-dynamic";
+const KEYS = ["lula", "flavio"] as const;
 
-export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
-  const sp = await searchParams;
-  if ((Array.isArray(sp.turno) ? sp.turno[0] : sp.turno) === "2") return <Pesquisas2 />;
-  const e = await getEstimates();
+/** Pesquisas de 2º turno (Lula x Flávio): mesma estrutura da tela do 1º turno. */
+export async function Pesquisas2() {
+  const e = await getEstimates2();
+  const from = new Date(Date.parse(`${e.asOf}T12:00:00Z`) - WINDOW_DAYS * 86_400_000).toISOString().slice(0, 10);
+  const names = e.reliable.map((r) => r.institute);
+  const inB = new Set(names);
   const dots = e.polls.flatMap((p) => {
     const v = validShares(p);
     return v ? [{ end: p.end, v }] : [];
   });
-  const from = new Date(Date.parse(`${e.asOf}T12:00:00Z`) - WINDOW_DAYS * 86_400_000).toISOString().slice(0, 10);
-  const reliableNames = e.reliable.map((r) => r.institute);
-  const inWindow = e.general.rows;
-  const certeirosIds = new Set(reliableNames);
 
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Pesquisas · 1º turno"
-        subtitle={`Votos válidos (sem brancos, nulos e indecisos) · pesquisas nacionais dos últimos ${WINDOW_DAYS} dias · votação em 04/10`}
-        turno={1}
+        title="Pesquisas · 2º turno"
+        subtitle={`Lula × Flávio Bolsonaro · votos válidos · pesquisas de 2º turno dos últimos ${WINDOW_DAYS} dias · eventual 2º turno em 25/10`}
+        turno={2}
         basePath="/"
         source={e.source}
       />
 
-      {e.pending.length > 0 && (
-        <div className="card flex flex-wrap items-center gap-x-3 gap-y-1.5 p-3 text-sm text-muted">
-          <span className="font-medium text-fg">Aguardando divulgação:</span>
-          {[...new Map(e.pending.map((x) => [`${x.institute}${x.end}`, x])).values()].map((x) => (
-            <span key={`${x.institute}${x.end}`} className="rounded-full border border-line bg-[#0f1630] px-2.5 py-0.5 text-xs">
-              {x.institute} · {dmy(x.end)}
-            </span>
-          ))}
-          <span className="text-xs text-faint">As médias se atualizam sozinhas quando saem (leitura a cada 5 min).</span>
-        </div>
-      )}
+      <div className="card p-3 text-sm text-muted">
+        São pesquisas do tipo “se o 2º turno fosse hoje”, feitas antes de saber quem passa. Depois do 1º turno de domingo, as novas pesquisas passam a
+        pesar mais automaticamente.
+      </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <SharesCard
@@ -53,6 +42,7 @@ export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
           title="Média de todas as pesquisas"
           subtitle={`${e.general.nPolls} pesquisas · ${e.general.nInstitutes} institutos`}
           shares={e.general.shares}
+          keys={[...KEYS]}
           footer={
             <div className="space-y-1">
               <div><Gap shares={e.general.shares} /> · margem de erro média declarada ±{dec(e.general.avgMoe)} p.p.</div>
@@ -60,31 +50,36 @@ export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
             </div>
           }
         />
-        <SharesCard
-          badge="B"
-          title="Média dos institutos mais certeiros"
-          subtitle={`${e.certeiros.nPolls} pesquisas · ${reliableNames.join(", ")}`}
-          shares={e.certeiros.shares}
-          footer={
-            <div className="space-y-1">
-              <div><Gap shares={e.certeiros.shares} /> · margem de erro média declarada ±{dec(e.certeiros.avgMoe)} p.p.</div>
-              <div>Só os {reliableNames.length} institutos ativos que mais chegaram perto do resultado real em 2018 e 2022, com mais peso para quem errou menos.</div>
-            </div>
-          }
-        />
+        {e.certeiros ? (
+          <SharesCard
+            badge="B"
+            title="Média dos institutos mais certeiros"
+            subtitle={`${e.certeiros.nPolls} pesquisas · ${names.join(", ")}`}
+            shares={e.certeiros.shares}
+            keys={[...KEYS]}
+            footer={
+              <div className="space-y-1">
+                <div><Gap shares={e.certeiros.shares} /> · margem de erro média declarada ±{dec(e.certeiros.avgMoe)} p.p.</div>
+                <div>Só os {names.length} institutos ativos que mais chegaram perto do resultado do 2º turno de 2018 e 2022.</div>
+              </div>
+            }
+          />
+        ) : (
+          <div className="card p-5 text-sm text-muted">Nenhum instituto com histórico de 2º turno publicou pesquisa nos últimos {WINDOW_DAYS} dias.</div>
+        )}
       </div>
 
       <section className="card p-5">
         <h2 className="text-base font-semibold">Evolução da média</h2>
-        <p className="mb-3 mt-1 text-sm text-muted">Lula e Flávio em votos válidos, nos últimos {WINDOW_DAYS} dias.</p>
+        <p className="mb-3 mt-1 text-sm text-muted">Lula e Flávio no 2º turno, em votos válidos, nos últimos {WINDOW_DAYS} dias.</p>
         <Trend general={e.trendGeneral} certeiros={e.trendCerteiros} dots={dots} from={from} to={e.asOf} />
       </section>
 
       <section className="card p-5">
-        <h2 className="text-base font-semibold">Quem acertou mais em 2018 e 2022</h2>
+        <h2 className="text-base font-semibold">Quem acertou mais no 2º turno de 2018 e 2022</h2>
         <p className="mb-3 mt-1 text-sm text-muted">
-          Erro médio da última pesquisa de cada instituto antes do 1º turno, em votos válidos (pontos percentuais; menor é melhor). Os dois mais votados
-          pesam o dobro. A nota mistura as duas eleições (2022 vale mais) e puxa para a média quem tem pouco histórico.
+          Erro da última pesquisa de cada instituto antes do 2º turno, em votos válidos (pontos percentuais; menor é melhor). A nota mistura as duas
+          eleições (2022 vale mais) e puxa para a média quem tem pouco histórico. São só duas disputas, então a nota é menos estável que a do 1º turno.
         </p>
         <div className="scroll-x">
           <table className="w-full min-w-[520px] text-sm">
@@ -111,10 +106,10 @@ export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
                     <td className="num py-2 pr-3 text-right">{y18 ? dec(y18.err) : "—"}</td>
                     <td className="num py-2 pr-3 text-right font-semibold">{dec(r.score)}</td>
                     <td className="py-2 text-xs">
-                      {certeirosIds.has(r.institute) ? (
+                      {inB.has(r.institute) ? (
                         <span className="rounded bg-[#1d3b2f] px-1.5 py-0.5 text-[#6ee7b7]">na média B</span>
                       ) : active ? (
-                        <span className="text-muted">ativo, fora do top {reliableNames.length}</span>
+                        <span className="text-muted">ativo, fora do top {names.length}</span>
                       ) : (
                         <span className="text-faint">sem pesquisa recente</span>
                       )}
@@ -125,46 +120,42 @@ export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs text-faint">
-          Institutos novos em 2026 (Palver, Indexa, Gerp, DataTrends, Vox Brasil, Alfa e outros) não têm histórico em 2018/2022 e só entram na média A.
-          O Ibope de 2018 foi contado como Ipec (a equipe migrou).
-        </p>
       </section>
 
       <section className="card p-5">
         <h2 className="text-base font-semibold">Todas as pesquisas usadas</h2>
         <p className="mb-3 mt-1 text-sm text-muted">
-          {inWindow.length} pesquisas nos últimos {WINDOW_DAYS} dias, em votos válidos, da mais recente para a mais antiga. “Peso” é a fatia de cada uma na média A.
+          {e.general.rows.length} pesquisas de 2º turno nos últimos {WINDOW_DAYS} dias, em votos válidos, da mais recente para a mais antiga. “Peso” é a fatia de cada uma na média A.
         </p>
         <div className="scroll-x">
-          <table className="w-full min-w-[760px] text-sm">
+          <table className="w-full min-w-[560px] text-sm">
             <thead>
               <tr className="border-b border-line text-left text-xs text-faint">
                 <th className="py-2 pr-3 font-medium">Instituto</th>
                 <th className="py-2 pr-3 font-medium">Campo até</th>
                 <th className="py-2 pr-3 text-right font-medium">Amostra</th>
                 <th className="py-2 pr-3 text-right font-medium">Margem</th>
-                {CANDIDATES.map((c) => (
-                  <th key={c.key} className="py-2 pr-3 text-right font-medium" style={{ color: c.color }}>
-                    <span className="inline-flex flex-col items-end gap-1"><CandidateAvatar k={c.key} size={22} />{c.short}</span>
+                {KEYS.map((k) => (
+                  <th key={k} className="py-2 pr-3 text-right font-medium" style={{ color: BY_KEY[k].color }}>
+                    <span className="inline-flex flex-col items-end gap-1"><CandidateAvatar k={k} size={22} />{BY_KEY[k].short}</span>
                   </th>
                 ))}
                 <th className="py-2 text-right font-medium">Peso</th>
               </tr>
             </thead>
             <tbody>
-              {inWindow.map((r, i) => (
+              {e.general.rows.map((r, i) => (
                 <tr key={i} className="border-b border-line/50">
                   <td className="py-1.5 pr-3 font-medium">
                     {r.poll.institute}
-                    {certeirosIds.has(r.poll.institute) && <span className="ml-1.5 text-[10px] text-[#6ee7b7]" title="faz parte da média B">●</span>}
+                    {inB.has(r.poll.institute) && <span className="ml-1.5 text-[10px] text-[#6ee7b7]" title="faz parte da média B">●</span>}
                     {r.poll.origin === "manual" && <span className="ml-1.5 text-[10px] text-accent" title="lançada à mão">manual</span>}
                   </td>
                   <td className="py-1.5 pr-3 text-muted">{dmy(r.poll.end)}</td>
                   <td className="num py-1.5 pr-3 text-right text-muted">{r.poll.n ? int(r.poll.n) : "—"}</td>
                   <td className="num py-1.5 pr-3 text-right text-muted">{r.poll.moe ? `±${dec(r.poll.moe)}` : "—"}</td>
-                  {CANDIDATES.map((c) => (
-                    <td key={c.key} className="num py-1.5 pr-3 text-right">{dec(r.valid[c.key])}</td>
+                  {KEYS.map((k) => (
+                    <td key={k} className="num py-1.5 pr-3 text-right">{dec(r.valid[k])}</td>
                   ))}
                   <td className="num py-1.5 text-right text-muted">{pct(r.share * 100)}</td>
                 </tr>
@@ -174,7 +165,7 @@ export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
         </div>
       </section>
 
-      <Method />
+      <Method turno={2} />
     </div>
   );
 }

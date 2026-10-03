@@ -13,6 +13,16 @@
    "Alckmin": 4.76
   }
  },
+ "results2": {
+  "2022": {
+   "Lula": 50.9,
+   "Bolsonaro": 49.1
+  },
+  "2018": {
+   "Haddad": 44.87,
+   "Bolsonaro": 55.13
+  }
+ },
  "elections": {
   "2022": [
    {
@@ -247,6 +257,500 @@
     "nominalTotal": 93.0
    }
   ],
-  "2018": []
+  "2018": [
+   {
+    "institute": "Ipec",
+    "end": "2018-10-06",
+    "n": 3010.0,
+    "moe": 2.0,
+    "Haddad": 22.0,
+    "Ciro": 11.0,
+    "Alckmin": 7.0,
+    "Bolsonaro": 36.0,
+    "nominalTotal": 87.0
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2018-10-06",
+    "n": 19552.0,
+    "moe": 2.0,
+    "Haddad": 22.0,
+    "Ciro": 13.0,
+    "Alckmin": 7.0,
+    "Bolsonaro": 36.0,
+    "nominalTotal": 90.0
+   },
+   {
+    "institute": "CNT/MDA",
+    "end": "2018-10-05",
+    "n": 2002.0,
+    "moe": 2.2,
+    "Haddad": 24.0,
+    "Ciro": 9.9,
+    "Alckmin": 5.8,
+    "Bolsonaro": 36.7,
+    "nominalTotal": 86.1
+   },
+   {
+    "institute": "Veritá",
+    "end": "2018-10-05",
+    "n": 5208.0,
+    "moe": 2.0,
+    "Haddad": 18.8,
+    "Ciro": 8.4,
+    "Alckmin": 4.2,
+    "Bolsonaro": 41.5,
+    "nominalTotal": 81.0
+   },
+   {
+    "institute": "Ipespe",
+    "end": "2018-10-04",
+    "n": 2000.0,
+    "moe": 2.2,
+    "Haddad": 22.0,
+    "Ciro": 11.0,
+    "Alckmin": 7.0,
+    "Bolsonaro": 36.0,
+    "nominalTotal": 88.0
+   },
+   {
+    "institute": "PoderData",
+    "end": "2018-10-04",
+    "n": 4000.0,
+    "moe": 2.0,
+    "Haddad": 25.0,
+    "Ciro": 15.0,
+    "Alckmin": 7.0,
+    "Bolsonaro": 30.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2018-10-04",
+    "n": 10930.0,
+    "moe": 2.0,
+    "Haddad": 22.0,
+    "Ciro": 11.0,
+    "Alckmin": 8.0,
+    "Bolsonaro": 35.0,
+    "nominalTotal": 88.0
+   },
+   {
+    "institute": "Paraná Pesquisas",
+    "end": "2018-10-04",
+    "n": 2080.0,
+    "moe": 2.0,
+    "Haddad": 21.8,
+    "Ciro": 9.4,
+    "Alckmin": 7.4,
+    "Bolsonaro": 34.9,
+    "nominalTotal": 85.3
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2018-10-02",
+    "n": 3240.0,
+    "moe": 2.0,
+    "Haddad": 21.0,
+    "Ciro": 11.0,
+    "Alckmin": 9.0,
+    "Bolsonaro": 32.0,
+    "nominalTotal": 86.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2018-10-02",
+    "n": 3010.0,
+    "moe": 2.0,
+    "Haddad": 23.0,
+    "Ciro": 10.0,
+    "Alckmin": 7.0,
+    "Bolsonaro": 32.0,
+    "nominalTotal": 82.0
+   },
+   {
+    "institute": "Nexus",
+    "end": "2018-09-30",
+    "n": 2000.0,
+    "moe": 2.0,
+    "Haddad": 24.0,
+    "Ciro": 9.0,
+    "Alckmin": 11.0,
+    "Bolsonaro": 31.0,
+    "nominalTotal": 89.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2018-09-30",
+    "n": 3010.0,
+    "moe": 2.0,
+    "Haddad": 21.0,
+    "Ciro": 11.0,
+    "Alckmin": 8.0,
+    "Bolsonaro": 31.0,
+    "nominalTotal": 83.0
+   },
+   {
+    "institute": "CNT/MDA",
+    "end": "2018-09-28",
+    "n": 2000.0,
+    "moe": 2.2,
+    "Haddad": 25.2,
+    "Ciro": 9.4,
+    "Alckmin": 7.3,
+    "Bolsonaro": 28.2,
+    "nominalTotal": 80.0
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2018-09-28",
+    "n": 9000.0,
+    "moe": 2.0,
+    "Haddad": 22.0,
+    "Ciro": 11.0,
+    "Alckmin": 10.0,
+    "Bolsonaro": 28.0,
+    "nominalTotal": 86.0
+   }
+  ]
+ },
+ "round2": {
+  "2022": [
+   {
+    "institute": "Veritá",
+    "end": "2022-10-29",
+    "n": 17552.0,
+    "moe": null,
+    "Lula": 45.9,
+    "Bolsonaro": 47.8,
+    "nominalTotal": 93.7
+   },
+   {
+    "institute": "Quaest",
+    "end": "2022-10-29",
+    "n": 2000.0,
+    "moe": null,
+    "Lula": 46.0,
+    "Bolsonaro": 43.0,
+    "nominalTotal": 89.0
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2022-10-29",
+    "n": 8308.0,
+    "moe": null,
+    "Lula": 49.0,
+    "Bolsonaro": 45.0,
+    "nominalTotal": 94.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2022-10-29",
+    "n": 4272.0,
+    "moe": null,
+    "Lula": 50.0,
+    "Bolsonaro": 43.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "AtlasIntel",
+    "end": "2022-10-29",
+    "n": 7500.0,
+    "moe": null,
+    "Lula": 52.4,
+    "Bolsonaro": 45.7,
+    "nominalTotal": 98.1
+   },
+   {
+    "institute": "IFP",
+    "end": "2022-10-29",
+    "n": 2000.0,
+    "moe": null,
+    "Lula": 45.6,
+    "Bolsonaro": 45.3,
+    "nominalTotal": 90.9
+   },
+   {
+    "institute": "CNT/MDA",
+    "end": "2022-10-28",
+    "n": 2002.0,
+    "moe": null,
+    "Lula": 46.9,
+    "Bolsonaro": 44.9,
+    "nominalTotal": 91.8
+   },
+   {
+    "institute": "Paraná Pesquisas",
+    "end": "2022-10-28",
+    "n": 2020.0,
+    "moe": null,
+    "Lula": 47.1,
+    "Bolsonaro": 46.3,
+    "nominalTotal": 93.4
+   },
+   {
+    "institute": "Veritá",
+    "end": "2022-10-27",
+    "n": 30180.0,
+    "moe": null,
+    "Lula": 46.1,
+    "Bolsonaro": 49.0,
+    "nominalTotal": 95.1
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2022-10-27",
+    "n": 4592.0,
+    "moe": null,
+    "Lula": 49.0,
+    "Bolsonaro": 44.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "Brasmarket",
+    "end": "2022-10-27",
+    "n": 2400.0,
+    "moe": null,
+    "Lula": 42.7,
+    "Bolsonaro": 48.2,
+    "nominalTotal": 90.9
+   },
+   {
+    "institute": "Futura",
+    "end": "2022-10-26",
+    "n": 2000.0,
+    "moe": null,
+    "Lula": 46.6,
+    "Bolsonaro": 47.2,
+    "nominalTotal": 93.8
+   },
+   {
+    "institute": "Gerp",
+    "end": "2022-10-26",
+    "n": 2095.0,
+    "moe": null,
+    "Lula": 43.0,
+    "Bolsonaro": 47.0,
+    "nominalTotal": 90.0
+   },
+   {
+    "institute": "Brasmarket",
+    "end": "2022-10-25",
+    "n": 2400.0,
+    "moe": null,
+    "Lula": 41.9,
+    "Bolsonaro": 48.0,
+    "nominalTotal": 89.9
+   },
+   {
+    "institute": "AtlasIntel",
+    "end": "2022-10-25",
+    "n": 7500.0,
+    "moe": null,
+    "Lula": 52.4,
+    "Bolsonaro": 46.0,
+    "nominalTotal": 98.4
+   },
+   {
+    "institute": "PoderData",
+    "end": "2022-10-25",
+    "n": 5000.0,
+    "moe": null,
+    "Lula": 49.0,
+    "Bolsonaro": 44.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "Quaest",
+    "end": "2022-10-25",
+    "n": 2000.0,
+    "moe": null,
+    "Lula": 48.0,
+    "Bolsonaro": 42.0,
+    "nominalTotal": 90.0
+   },
+   {
+    "institute": "Ipespe",
+    "end": "2022-10-24",
+    "n": 1100.0,
+    "moe": null,
+    "Lula": 50.0,
+    "Bolsonaro": 44.0,
+    "nominalTotal": 94.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2022-10-24",
+    "n": 3008.0,
+    "moe": null,
+    "Lula": 50.0,
+    "Bolsonaro": 43.0,
+    "nominalTotal": 93.0
+   },
+   {
+    "institute": "Paraná Pesquisas",
+    "end": "2022-10-24",
+    "n": 2020.0,
+    "moe": null,
+    "Lula": 46.3,
+    "Bolsonaro": 45.9,
+    "nominalTotal": 92.2
+   },
+   {
+    "institute": "Brasmarket",
+    "end": "2022-10-23",
+    "n": 2400.0,
+    "moe": null,
+    "Lula": 41.8,
+    "Bolsonaro": 47.7,
+    "nominalTotal": 89.5
+   },
+   {
+    "institute": "AtlasIntel",
+    "end": "2022-10-22",
+    "n": 4500.0,
+    "moe": null,
+    "Lula": 52.0,
+    "Bolsonaro": 46.2,
+    "nominalTotal": 98.2
+   },
+   {
+    "institute": "IFP",
+    "end": "2022-10-21",
+    "n": 1500.0,
+    "moe": null,
+    "Lula": 43.6,
+    "Bolsonaro": 46.5,
+    "nominalTotal": 90.1
+   },
+   {
+    "institute": "Veritá",
+    "end": "2022-10-20",
+    "n": 20220.0,
+    "moe": null,
+    "Lula": 46.7,
+    "Bolsonaro": 49.4,
+    "nominalTotal": 96.1
+   },
+   {
+    "institute": "PoderData",
+    "end": "2022-10-27",
+    "n": 2500.0,
+    "moe": null,
+    "Lula": 52.0,
+    "Bolsonaro": 37.0,
+    "nominalTotal": 89.0
+   },
+   {
+    "institute": "Futura",
+    "end": "2022-10-22",
+    "n": 2000.0,
+    "moe": null,
+    "Lula": 49.2,
+    "Bolsonaro": 37.4,
+    "nominalTotal": 86.6
+   }
+  ],
+  "2018": [
+   {
+    "institute": "CNT/MDA",
+    "end": "2018-10-27",
+    "n": 2002.0,
+    "moe": 2.2,
+    "Haddad": 37.0,
+    "Bolsonaro": 48.5,
+    "nominalTotal": 85.5
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2018-10-27",
+    "n": 18371.0,
+    "moe": 2.0,
+    "Haddad": 39.0,
+    "Bolsonaro": 47.0,
+    "nominalTotal": 86.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2018-10-27",
+    "n": 3010.0,
+    "moe": 2.0,
+    "Haddad": 41.0,
+    "Bolsonaro": 47.0,
+    "nominalTotal": 88.0
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2018-10-25",
+    "n": 9173.0,
+    "moe": 2.0,
+    "Haddad": 38.0,
+    "Bolsonaro": 48.0,
+    "nominalTotal": 86.0
+   },
+   {
+    "institute": "Paraná Pesquisas",
+    "end": "2018-10-25",
+    "n": 2120.0,
+    "moe": 2.0,
+    "Haddad": 34.4,
+    "Bolsonaro": 53.0,
+    "nominalTotal": 87.4
+   },
+   {
+    "institute": "Ipespe",
+    "end": "2018-10-24",
+    "n": 2000.0,
+    "moe": 2.2,
+    "Haddad": 37.0,
+    "Bolsonaro": 51.0,
+    "nominalTotal": 88.0
+   },
+   {
+    "institute": "Ipec",
+    "end": "2018-10-23",
+    "n": 3010.0,
+    "moe": 2.0,
+    "Haddad": 37.0,
+    "Bolsonaro": 50.0,
+    "nominalTotal": 87.0
+   },
+   {
+    "institute": "CNT/MDA",
+    "end": "2018-10-21",
+    "n": 2002.0,
+    "moe": 2.2,
+    "Haddad": 36.7,
+    "Bolsonaro": 48.8,
+    "nominalTotal": 85.5
+   },
+   {
+    "institute": "Nexus",
+    "end": "2018-10-21",
+    "n": 2000.0,
+    "moe": 2.0,
+    "Haddad": 35.0,
+    "Bolsonaro": 52.0,
+    "nominalTotal": 87.0
+   },
+   {
+    "institute": "PoderData",
+    "end": "2018-10-18",
+    "n": 4000.0,
+    "moe": 2.0,
+    "Haddad": 31.0,
+    "Bolsonaro": 57.0,
+    "nominalTotal": 88.0
+   },
+   {
+    "institute": "Datafolha",
+    "end": "2018-10-18",
+    "n": 9137.0,
+    "moe": 2.0,
+    "Haddad": 35.0,
+    "Bolsonaro": 50.0,
+    "nominalTotal": 85.0
+   }
+  ]
  }
 }

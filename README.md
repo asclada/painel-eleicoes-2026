@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Eleição 2026 · Simulação
 
-## Getting Started
+Painel pessoal para acompanhar a eleição presidencial de 2026: pesquisas em votos válidos, previsões e apuração ao vivo do 1º turno (04/10/2026), com comparação entre a contagem real e o que as pesquisas/previsões apontavam.
 
-First, run the development server:
+Três telas (Pesquisas e Previsões têm o botão **1º turno / 2º turno**, que usa `?turno=2`; a apuração é só do 1º turno):
+
+| Rota | O que mostra |
+|---|---|
+| `/` | Média A (todas as pesquisas dos últimos 90 dias) e média B (só os institutos que mais acertaram em 2018 e 2022), evolução da média, ranking de acerto histórico, tabela de todas as pesquisas usadas. |
+| `/previsoes` | Previsão A e B: votos válidos projetados com faixa de 90%, chance de liderar, de vencer no 1º turno, de haver 2º turno e de cada candidato ir ao 2º turno. Chave de correção do viés histórico (0%, 20% padrão, 50%). |
+| `/apuracao` | Contagem do TSE (atualiza a cada 20 s), % de seções apuradas, mapa do Brasil e tabela estado a estado (quem lidera em cada UF), tabela contagem × pesquisas × previsões, ranking de quem está mais perto e gráfico do erro ao longo da apuração. |
+
+Candidatos acompanhados: Lula, Flávio Bolsonaro, Ronaldo Caiado, Augusto Cury, Renan Santos e Romeu Zema (os demais entram em "Demais").
+
+## Rodar localmente
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Modos de teste da apuração (não dependem de a eleição ter começado):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/apuracao?env=demo`: simulação com números inventados e um controle de "% apurado".
+- `/apuracao?env=simulado`: lê o ambiente de ensaio do TSE (candidatos fictícios), para testar a conexão.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Como as pesquisas se atualizam
 
-## Learn More
+As pesquisas de 2026 são lidas da Wikipédia (que cita os registros do TSE) direto no servidor, no máximo a cada 5 minutos, e o cálculo é refeito em cada leitura. Só a seção "Primeiro turno > 2026" é baixada (código em `src/lib/polls.ts`). Se a Wikipédia falhar, o site usa a última leitura em memória e, na falta dela, a cópia salva em `data/polls2026.json`.
 
-To learn more about Next.js, take a look at the following resources:
+A Wikipédia pode demorar para registrar uma pesquisa nova. Nesse caso, adicione-a em `data/manual-polls.json` (e faça o deploy de novo). Ela tem prioridade sobre a mesma pesquisa vinda da Wikipédia. Valores em % do total de entrevistados, como divulgado:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+[
+  {
+    "institute": "AtlasIntel",
+    "start": "2026-09-30",
+    "end": "2026-10-02",
+    "n": 5000,
+    "moe": 1.0,
+    "lula": 44.9, "flavio": 42.1, "caiado": 2.0, "cury": 2.1, "renan": 5.0, "zema": 1.0,
+    "demais": 0.5, "outros": null, "indecisos": 2.0
+  }
+]
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Use os nomes de instituto já existentes (`Datafolha`, `Quaest`, `AtlasIntel`, `Futura`, `Gerp`, `PoderData`, `CNT/MDA`, `Veritá`, `Nexus`, `Ideia`, `Real Time Big Data`, `Palver`, `Indexa`, `Vox Brasil`, `DataTrends`...) para o histórico de acerto ser aplicado.
 
-## Deploy on Vercel
+As pesquisas de 2º turno (Lula × Flávio) seguem o mesmo esquema, em `data/manual-polls-r2.json`, com `lula` e `flavio` em % do total de entrevistados.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Para refazer as cópias salvas (`data/polls2026.json`, `data/polls2026_r2.json`) e os dados históricos de 1º e 2º turno de 2018/2022 (`data/history.json`) a partir da Wikipédia:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pip install beautifulsoup4 lxml
+python scripts/build_data.py
+```
+
+O contorno dos estados vem da malha do IBGE e foi gerado por `python scripts/gen_brazil_map.py` (só precisa rodar de novo se quiser atualizar).
+
+## Metodologia (resumo)
+
+Detalhes na seção "Como calculamos" das telas.
+
+- **Votos válidos**: cada pesquisa é normalizada pela soma dos candidatos (sem branco, nulo e indecisos).
+- **Média**: peso por recência (meia-vida de 7 dias), margem de erro (0,5× a 2×) e amortecimento para institutos com muitas pesquisas (÷√n).
+- **Institutos certeiros**: erro da última pesquisa antes do 1º turno de 2018 e 2022 contra o resultado do TSE, nos 4 mais votados (os 2 primeiros valem o dobro). 2022 pesa 2, 2018 pesa 1, com encolhimento para a média quando só há uma eleição. Média B = melhores 6 institutos ativos, ponderados por 1/nota².
+- **2º turno**: mesma receita só com Lula × Flávio; o histórico usa o 2º turno de 2018 e 2022, e a chance de vencer é a parte de uma curva normal acima de 50%.
+- **Previsão**: média + fração do viés histórico; incerteza = erro histórico + discordância entre institutos; 20 mil simulações com os dois líderes correlacionados negativamente (−0,25).
+
+Limites: só duas eleições de referência, vários institutos novos sem histórico, e pesquisa é retrato do momento, não previsão.
+
+## Apuração do TSE
+
+Arquivo público lido no servidor (`src/lib/tse.ts`, rota `/api/apuracao`), porque o TSE não libera CORS para o navegador:
+
+- Oficial: `https://resultados.tse.jus.br/oficial/ele2026/6257/dados/br/br-c0001-e006257-u.json`
+- Simulado: `https://resultados-sim.tse.jus.br/simulado/simulado2026/ele2026/21270/dados/br/br-c0001-e021270-u.json`
+
+Os estados vêm de `.../dados/<uf>/<uf>-c0001-e006257-u.json` (e `zz` para o exterior), lidos pela rota `/api/apuracao/uf` com cache de 15 s. Os candidatos são reconhecidos pelo número da urna (13, 22, 55, 70, 14, 30).
+
+## Deploy (Vercel)
+
+```bash
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+`vercel.json` fixa a região de execução em `gru1` (São Paulo). Depois do deploy, abra `/api/apuracao` para confirmar que o servidor consegue ler o TSE.

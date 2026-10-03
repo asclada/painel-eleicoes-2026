@@ -40,6 +40,13 @@ RESULTS = {
     2018: {"Bolsonaro": 46.03, "Haddad": 29.28, "Ciro": 12.47, "Alckmin": 4.76},
 }
 
+# Resultado oficial do 2º turno (TSE), em % dos votos válidos.
+RESULTS2 = {
+    2022: {"Lula": 50.90, "Bolsonaro": 49.10},
+    2018: {"Haddad": 44.87, "Bolsonaro": 55.13},
+}
+ELECTION_DAY_R2 = {2022: date(2022, 10, 30), 2018: date(2018, 10, 28)}
+
 MONTHS = {"jan": 1, "fev": 2, "mar": 3, "abr": 4, "mai": 5, "jun": 6, "jul": 7, "ago": 8,
           "set": 9, "out": 10, "nov": 11, "dez": 12,
           "janeiro": 1, "fevereiro": 2, "março": 3, "abril": 4, "maio": 5, "junho": 6, "julho": 7,
@@ -125,12 +132,17 @@ def num(s):
         return None
 
 
+YEAR_RE = re.compile(r"(?:19|20)[0-9]{2}")
+
+
 def parse_dates(s, year):
-    """Retorna (inicio, fim) como date a partir de textos como '28 Set – 1 Out', '25–26 Set',
-    '5–6 de outubro de 2018'. O mês final é o último mês citado."""
-    s = re.sub(r"(19|20)\d{2}", "", strip_accents(s.lower()))
-    toks = re.findall(r"(\d{1,2})(?:\s*de)?\s*(?:([a-z]{3,9}))?", s)
-    toks = [(int(d), MONTHS.get(m) or MONTHS.get(m[:3]) if m else None) for d, m in toks if 1 <= int(d) <= 31]
+    """Retorna (inicio, fim) como date a partir de textos como '28 Set - 1 Out', '25-26 Set',
+    '5-6 de outubro de 2018'. O mes final e o ultimo mes citado."""
+    s = YEAR_RE.sub(" ", strip_accents(s.lower()))
+    toks = []
+    for d, m in re.findall(r"([0-9]{1,2})(?:\s*de)?\s*(?:([a-z]{3,9}))?", s):
+        if 1 <= int(d) <= 31:
+            toks.append((int(d), (MONTHS.get(m) or MONTHS.get(m[:3])) if m else None))
     if not toks:
         return None
     end_month = next((m for _, m in reversed(toks) if m), None)
@@ -144,8 +156,8 @@ def parse_dates(s, year):
         start = date(year, start_month, start_day)
     except ValueError:
         return None
-    if start > end:  # '30–2 Out' sem mês no início
-        start = date(year if start_month < 12 else year - 1, start_month - 1 or 12, start_day)
+    if start > end:
+        start = date(year, max(start_month - 1, 1), start_day)
     return start, end
 
 
@@ -162,6 +174,9 @@ ALIASES = [  # (trecho em minúsculas sem acento, nome canônico) — a ordem im
     ("equilibrio", "Equilíbrio Brasil"), ("meio", "Ideia"), ("vetor", "Vetor/Arrow"),
     ("arrow", "Vetor/Arrow"), ("paranapesquisas", "Paraná Pesquisas"),
 ]
+
+
+KNOWN = {n for _, n in ALIASES}
 
 
 def inst_name(raw):
@@ -299,15 +314,105 @@ def parse_2018():
             if len(vals) < 4:
                 continue
             nominal += num(r[13]) or 0
-            out.append({"institute": inst_name(r[1]), "end": dts[1].isoformat(), "n": num(r[2]), "moe": num(r[3]),
+            inst = inst_name(r[1])
+            # descarta espontâneas (soma baixa) e institutos sem alias conhecido
+            if nominal < 78 or inst not in KNOWN:
+                continue
+            out.append({"institute": inst, "end": dts[1].isoformat(), "n": num(r[2]), "moe": num(r[3]),
                         **vals, "nominalTotal": round(nominal, 2)})
     return out
 
 
-def last_week(polls, year, days=10):
-    cutoff = ELECTION_DAY[year].toordinal() - days
+# --- 2º turno -----------------------------------------------------------------------------------
+def parse_2026_r2():
+    """Lula x Flávio, 2026 (tabela "Segundo turno > Lula e Flávio Bolsonaro > 2026")."""
+    soup = fetch(PAGES[2026])
+    polls, seen = [], set()
+    for h, t in tables(soup):
+        if h["h2"] != "Segundo turno" or not h["h3"].startswith("Lula e Fl") or h["h4"] != "2026":
+            continue
+        g = grid(t)
+        hdr = next((r for r in g if any(strip_accents(c.lower()).startswith("lula") for c in r)), None)
+        if not hdr:
+            continue
+        col = {}
+        for i, c in enumerate(hdr):
+            k = strip_accents(c.lower())
+            if k.startswith("lula"):
+                col["lula"] = i
+            elif k.startswith("flavio"):
+                col["flavio"] = i
+            elif k.startswith("indecis"):
+                col["indecisos"] = i
+        for r in g:
+            if len(r) != len(hdr) or r[0].startswith("Contratante") or len(set(r[:4])) == 1:
+                continue
+            lula, flavio = num(r[col["lula"]]), num(r[col["flavio"]])
+            dts = parse_dates(r[1], 2026)
+            if lula is None or flavio is None or not dts:
+                continue
+            inst, n = inst_name(r[0]), num(r[2])
+            key = (inst, dts[1], int(n or 0))
+            if key in seen:
+                continue
+            seen.add(key)
+            polls.append({"institute": inst, "start": dts[0].isoformat(), "end": dts[1].isoformat(),
+                          "n": int(n) if n else None, "moe": num(r[3]), "lula": lula, "flavio": flavio,
+                          "indecisos": num(r[col["indecisos"]]) if "indecisos" in col else None})
+    polls.sort(key=lambda p: (p["end"], p["institute"]), reverse=True)
+    return polls
+
+
+def parse_2022_r2():
+    soup = fetch(PAGES[2022])
+    out = []
+    for h, t in tables(soup):
+        if h["h2"] != "Segundo turno" or h["h3"] != "Bolsonaro x Lula":
+            continue
+        g = grid(t)
+        hdr = next((r for r in g if any(c.startswith("Bolsonaro") for c in r) and any(c.startswith("Lula") for c in r)), None)
+        if not hdr or len(g) < 50 or hdr[0].startswith("Agregador"):
+            continue
+        ib = next(i for i, c in enumerate(hdr) if c.startswith("Bolsonaro"))
+        il = next(i for i, c in enumerate(hdr) if c.startswith("Lula"))
+        for r in g:
+            if len(r) != len(hdr) or r[0].startswith("Instituto de") or len(set(r[:4])) == 1:
+                continue
+            bo, lu = num(r[ib]), num(r[il])
+            dts = parse_dates(r[1], 2022)
+            # soma baixa = cenário espontâneo/estranho; as pesquisas estimuladas somam ~85-98
+            if bo is None or lu is None or not dts or lu + bo < 85:
+                continue
+            out.append({"institute": inst_name(r[0]), "end": dts[1].isoformat(), "n": num(r[2]), "moe": None,
+                        "Lula": lu, "Bolsonaro": bo, "nominalTotal": round(lu + bo, 2)})
+    return out
+
+
+def parse_2018_r2():
+    soup = fetch(PAGES[2018])
+    out = []
+    for h, t in tables(soup):
+        if h["h2"] != "Segundo turno" or h["h4"] != "Depois do primeiro turno":
+            continue
+        g = grid(t)
+        for r in g[2:]:
+            if len(r) < 6:
+                continue
+            dts = parse_dates(r[0], 2018)
+            ha, bo = num(r[4]), num(r[5])
+            inst = inst_name(r[1])
+            if not dts or ha is None or bo is None or inst not in KNOWN or ha + bo < 85:
+                continue
+            out.append({"institute": inst, "end": dts[1].isoformat(), "n": num(r[2]), "moe": num(r[3]),
+                        "Haddad": ha, "Bolsonaro": bo, "nominalTotal": round(ha + bo, 2)})
+    return out
+
+
+def last_week(polls, year, days=10, day=None):
+    day = day or ELECTION_DAY[year]
+    cutoff = day.toordinal() - days
     return [p for p in polls if date.fromisoformat(p["end"]).toordinal() >= cutoff
-            and date.fromisoformat(p["end"]) < ELECTION_DAY[year]]
+            and date.fromisoformat(p["end"]) < day]
 
 
 def main():
@@ -315,12 +420,18 @@ def main():
     (OUT / "polls2026.json").write_text(json.dumps(
         {"source": "Wikipédia (pt) – pesquisas registradas no TSE", "generatedAt": date.today().isoformat(),
          "polls": p26}, ensure_ascii=False, indent=1), encoding="utf-8")
-    hist = {"results": RESULTS, "elections": {}}
+    p26b = parse_2026_r2()
+    (OUT / "polls2026_r2.json").write_text(json.dumps(
+        {"source": "Wikipédia (pt) – Lula x Flávio, 2º turno", "generatedAt": date.today().isoformat(),
+         "polls": p26b}, ensure_ascii=False, indent=1), encoding="utf-8")
+    hist = {"results": RESULTS, "results2": RESULTS2, "elections": {}, "round2": {}}
     for y, fn in ((2022, parse_2022), (2018, parse_2018)):
         hist["elections"][str(y)] = last_week(fn(), y)
+    for y, fn in ((2022, parse_2022_r2), (2018, parse_2018_r2)):
+        hist["round2"][str(y)] = last_week(fn(), y, day=ELECTION_DAY_R2[y])
     (OUT / "history.json").write_text(json.dumps(hist, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"2026: {len(p26)} pesquisas | 2022: {len(hist['elections']['2022'])} finais | "
-          f"2018: {len(hist['elections']['2018'])} finais")
+    print(f"2026 1º turno: {len(p26)} | 2026 2º turno: {len(p26b)} | 1º turno finais 2022: {len(hist['elections']['2022'])}, "
+          f"2018: {len(hist['elections']['2018'])} | 2º turno finais 2022: {len(hist['round2']['2022'])}, 2018: {len(hist['round2']['2018'])}")
 
 
 if __name__ == "__main__":
