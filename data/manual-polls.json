@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "institute": "Palver",
+    "start": "2026-09-30",
+    "end": "2026-10-03",
+    "n": 5000,
+    "moe": 2.4,
+    "lula": 43,
+    "flavio": 47,
+    "caiado": 1,
+    "cury": 1,
+    "renan": 7,
+    "zema": 0.5,
+    "demais": 0.5,
+    "outros": null,
+    "indecisos": 0.5,
+    "published": "2026-10-03"
+  }
+]
