@@ -36,4 +36,4 @@ Painel pessoal (Lucas e o pai) para acompanhar a eleição presidencial de 2026:
 ## Pendente / próximos passos
 - Fase 2: projeção do que falta contar (exige resultado de 2022 por município/UF), pesquisas de 2º turno e previsão do 2º turno (25/10/2026).
 
-Última atualização: 14/10/2026 (pesquisas de 2º turno de 05 a 13/10 lançadas à mão em `data/manual-polls-r2.json`, a partir de textos de imprensa; conferir com a Wikipédia quando ela atualizar).
+Última atualização: 14/10/2026 (pesquisas de 2º turno de 05 a 14/10 lançadas à mão em `data/manual-polls-r2.json`, a partir de textos de imprensa; última: Quaest/Globo, campo 10-13/10; conferir com a Wikipédia quando ela atualizar).

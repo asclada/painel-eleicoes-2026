@@ -141,5 +141,16 @@
     "flavio": 48,
     "indecisos": 2,
     "published": "2026-10-13"
+  },
+  {
+    "institute": "Quaest",
+    "start": "2026-10-10",
+    "end": "2026-10-13",
+    "n": 2154,
+    "moe": 2.0,
+    "lula": 44,
+    "flavio": 46,
+    "indecisos": 1,
+    "published": "2026-10-14"
   }
 ]
