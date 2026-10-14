@@ -21,7 +21,7 @@ Painel pessoal (Lucas e o pai) para acompanhar a eleição presidencial de 2026:
 - Faixa `PollsStrip`: "Pesquisas e previsões atualizadas com as mais recentes do dia DD/MM" (dia = `published` ou fim do campo + 1) e "Aguardando divulgação" (só as anunciadas nos últimos 2 dias e ainda sem resultado).
 - Apuração por estado: mapa real do Brasil (contorno IBGE em `src/lib/brazilPaths.ts`, gerado por `scripts/gen_brazil_map.py`) + tabela (`BrazilMap`, `UfTable`). O Lucas decidiu NÃO ter Modo TV. Só contagem real por UF; não há pesquisas/previsões por estado.
 - O aviso verde "pesquisas lidas da Wikipédia" foi removido a pedido; só aparece um alerta âmbar se a leitura falhar.
-- 2º turno (Lula × Flávio apenas, decisão do Lucas) em Pesquisas e Previsões via botão `?turno=2`: média A (todas), média B (certeiros em 2018/2022), previsão com curva normal (`forecast2` em `model.ts`, `getEstimates2`). A apuração ao vivo continua só de 1º turno (o 2º turno terá outro código no TSE, só confirmável em 25/10).
+- 2º turno (Lula × Flávio apenas, decisão do Lucas) em Pesquisas e Previsões. Desde 14/10/2026 o **2º turno é o padrão** em `/` e `/previsoes`; o 1º turno fica em `?turno=1` (botão no topo): média A (todas), média B (certeiros em 2018/2022), previsão com curva normal (`forecast2` em `model.ts`, `getEstimates2`). A apuração ao vivo continua só de 1º turno (o 2º turno terá outro código no TSE, só confirmável em 25/10).
 - Correção do viés: padrão 20% em ambos os turnos. No backtest com 2018+2022 (um de fora), corrigir mais (50-100%) reduz o erro, mas o efeito sobre as chances é pequeno (~1 p.p.). Lucas preferiu não mudar o método.
 - Fotos oficiais dos candidatos em `public/candidatos/` (baixadas do TSE).
 - Não enviar o e-mail do Lucas em requisições externas (o User-Agent da Wikipédia não leva contato).
@@ -36,4 +36,4 @@ Painel pessoal (Lucas e o pai) para acompanhar a eleição presidencial de 2026:
 ## Pendente / próximos passos
 - Fase 2: projeção do que falta contar (exige resultado de 2022 por município/UF), pesquisas de 2º turno e previsão do 2º turno (25/10/2026).
 
-Última atualização: 03/10/2026.
+Última atualização: 14/10/2026 (pesquisas de 2º turno de 05 a 13/10 lançadas à mão em `data/manual-polls-r2.json`, a partir de textos de imprensa; conferir com a Wikipédia quando ela atualizar).

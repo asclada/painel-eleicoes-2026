@@ -27,7 +27,7 @@ Projeto pessoal, sem vínculo com nenhum instituto de pesquisa, partido ou campa
 
 ## Telas
 
-Três telas (Pesquisas e Previsões têm o botão **1º turno / 2º turno**, que usa `?turno=2`; a apuração é só do 1º turno):
+Três telas (Pesquisas e Previsões abrem no **2º turno** (Lula × Flávio) e têm o botão **1º turno / 2º turno**; o 1º turno usa `?turno=1`; a apuração é só do 1º turno):
 
 | Rota | O que mostra |
 |---|---|

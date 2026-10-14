@@ -13,7 +13,7 @@ export default async function PrevisoesPage({ searchParams }: PageProps<"/previs
   const sp = await searchParams;
   const raw = Number(Array.isArray(sp.corr) ? sp.corr[0] : sp.corr);
   const corrPct = (CORRECTIONS as readonly number[]).includes(raw) ? raw : DEFAULT_CORRECTION;
-  if ((Array.isArray(sp.turno) ? sp.turno[0] : sp.turno) === "2") return <Previsoes2 corrPct={corrPct} />;
+  if ((Array.isArray(sp.turno) ? sp.turno[0] : sp.turno) !== "1") return <Previsoes2 corrPct={corrPct} />;
   const e = await getEstimates(corrPct);
   const reliableNames = e.reliable.map((r) => r.institute).join(", ");
 
@@ -39,7 +39,7 @@ export default async function PrevisoesPage({ searchParams }: PageProps<"/previs
           {CORRECTIONS.map((c) => (
             <Link
               key={c}
-              href={c === DEFAULT_CORRECTION ? "/previsoes" : `/previsoes?corr=${c}`}
+              href={c === DEFAULT_CORRECTION ? "/previsoes?turno=1" : `/previsoes?turno=1&corr=${c}`}
               scroll={false}
               aria-current={c === corrPct ? "true" : undefined}
               className={`rounded-full px-3.5 py-1.5 text-xs font-medium ${c === corrPct ? "bg-accent text-[#0b1020]" : "text-muted hover:text-fg"}`}

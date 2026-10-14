@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 export default async function PesquisasPage({ searchParams }: PageProps<"/">) {
   const sp = await searchParams;
-  if ((Array.isArray(sp.turno) ? sp.turno[0] : sp.turno) === "2") return <Pesquisas2 />;
+  if ((Array.isArray(sp.turno) ? sp.turno[0] : sp.turno) !== "1") return <Pesquisas2 />;
   const e = await getEstimates();
   const dots = e.polls.flatMap((p) => {
     const v = validShares(p);

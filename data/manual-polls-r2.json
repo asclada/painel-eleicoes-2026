@@ -31,5 +31,115 @@
     "flavio": 44,
     "indecisos": 1,
     "published": "2026-10-03"
+  },
+  {
+    "institute": "Datafolha",
+    "start": "2026-10-06",
+    "end": "2026-10-07",
+    "n": 2520,
+    "moe": 2.0,
+    "lula": 45,
+    "flavio": 49,
+    "indecisos": 1,
+    "published": "2026-10-08"
+  },
+  {
+    "institute": "PoderData",
+    "start": "2026-10-05",
+    "end": "2026-10-07",
+    "n": 3000,
+    "moe": 1.8,
+    "lula": 44,
+    "flavio": 49,
+    "indecisos": null,
+    "published": "2026-10-08"
+  },
+  {
+    "institute": "AtlasIntel",
+    "start": "2026-10-03",
+    "end": "2026-10-08",
+    "n": 5026,
+    "moe": 1.0,
+    "lula": 45.7,
+    "flavio": 51.1,
+    "indecisos": 3.2,
+    "published": "2026-10-09"
+  },
+  {
+    "institute": "Vox Brasil",
+    "start": "2026-10-05",
+    "end": "2026-10-07",
+    "n": 2100,
+    "moe": 2.15,
+    "lula": 44.2,
+    "flavio": 42.7,
+    "indecisos": 9.7,
+    "published": "2026-10-09"
+  },
+  {
+    "institute": "Ipespe",
+    "start": "2026-10-06",
+    "end": "2026-10-08",
+    "n": 1500,
+    "moe": 2.6,
+    "lula": 44,
+    "flavio": 49,
+    "indecisos": null,
+    "published": "2026-10-10"
+  },
+  {
+    "institute": "DataTrends",
+    "start": "2026-10-07",
+    "end": "2026-10-09",
+    "n": 2000,
+    "moe": 2.19,
+    "lula": 44,
+    "flavio": 50,
+    "indecisos": 1,
+    "published": "2026-10-11"
+  },
+  {
+    "institute": "Gerp",
+    "start": "2026-10-08",
+    "end": "2026-10-12",
+    "n": 2400,
+    "moe": 2.0,
+    "lula": 44,
+    "flavio": 53,
+    "indecisos": 3,
+    "published": "2026-10-13"
+  },
+  {
+    "institute": "Futura",
+    "start": "2026-10-07",
+    "end": "2026-10-10",
+    "n": 2000,
+    "moe": 2.2,
+    "lula": 46.6,
+    "flavio": 50,
+    "indecisos": 1.7,
+    "published": "2026-10-13"
+  },
+  {
+    "institute": "Nexus",
+    "start": "2026-10-10",
+    "end": "2026-10-12",
+    "n": 2002,
+    "moe": 2.0,
+    "lula": 45,
+    "flavio": 48,
+    "indecisos": 2,
+    "published": "2026-10-13"
+  },
+  {
+    "institute": "PoderData",
+    "start": "2026-10-10",
+    "end": "2026-10-12",
+    "n": 3000,
+    "moe": 1.8,
+    "lula": 46,
+    "flavio": 48,
+    "indecisos": 2,
+    "published": "2026-10-13"
   }
 ]

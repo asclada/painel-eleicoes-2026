@@ -29,17 +29,17 @@ export async function Pesquisas2() {
     <div className="space-y-6">
       <PageHeader
         title="Pesquisas · 2º turno"
-        subtitle={`Lula × Flávio Bolsonaro · votos válidos · pesquisas de 2º turno dos últimos ${WINDOW_DAYS} dias · eventual 2º turno em 25/10`}
+        subtitle={`Lula × Flávio Bolsonaro · votos válidos · pesquisas de 2º turno dos últimos ${WINDOW_DAYS} dias · 2º turno em 25/10`}
         turno={2}
         basePath="/"
         source={e.source}
       />
 
-      <PollsStrip />
+      <PollsStrip turno={2} />
 
       <div className="card p-3 text-sm text-muted">
-        São pesquisas do tipo “se o 2º turno fosse hoje”, feitas antes de saber quem passa. Depois do 1º turno de domingo, as novas pesquisas passam a
-        pesar mais automaticamente.
+        O 2º turno é Lula × Flávio Bolsonaro, em 25/10. As pesquisas feitas antes do 1º turno (04/10) eram do tipo “se o 2º turno fosse hoje” e perdem peso
+        com o tempo; as feitas depois, já com os dois definidos, pesam mais automaticamente.
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

@@ -107,14 +107,14 @@ export async function Previsoes2({ corrPct }: { corrPct: number }) {
     <div className="space-y-6">
       <PageHeader
         title="Previsões · 2º turno"
-        subtitle={`Lula × Flávio Bolsonaro · eventual 2º turno em 25/10 · votos válidos · ${e.general.nPolls} pesquisas dos últimos 90 dias`}
+        subtitle={`Lula × Flávio Bolsonaro · 2º turno em 25/10 · votos válidos · ${e.general.nPolls} pesquisas dos últimos 90 dias`}
         turno={2}
         basePath="/previsoes"
         keep={keep}
         source={e.source}
       />
 
-      <PollsStrip />
+      <PollsStrip turno={2} />
 
       <div className="card flex flex-wrap items-center justify-between gap-3 p-4 text-sm">
         <div className="max-w-xl text-muted">
@@ -126,7 +126,7 @@ export async function Previsoes2({ corrPct }: { corrPct: number }) {
           {CORRECTIONS.map((c) => (
             <Link
               key={c}
-              href={`/previsoes?turno=2${c === DEFAULT_CORRECTION ? "" : `&corr=${c}`}`}
+              href={c === DEFAULT_CORRECTION ? "/previsoes" : `/previsoes?corr=${c}`}
               scroll={false}
               aria-current={c === corrPct ? "true" : undefined}
               className={`rounded-full px-3.5 py-1.5 text-xs font-medium ${c === corrPct ? "bg-accent text-[#0b1020]" : "text-muted hover:text-fg"}`}

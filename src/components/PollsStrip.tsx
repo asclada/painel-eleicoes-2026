@@ -1,14 +1,15 @@
 import { dmy } from "@/lib/format";
 import { todayBR } from "@/lib/model";
-import { getPolls, publishedOf } from "@/lib/polls";
+import { getPolls, getPolls2, publishedOf } from "@/lib/polls";
 
 function Chip({ children }: { children: React.ReactNode }) {
   return <span className="rounded-full border border-line bg-[#0f1630] px-2.5 py-0.5 text-xs text-fg">{children}</span>;
 }
 
 /** Quais pesquisas já entraram nas contas (as mais recentes) e quais ainda estão para sair. */
-export async function PollsStrip() {
-  const { polls, pending } = await getPolls();
+export async function PollsStrip({ turno = 1 }: { turno?: 1 | 2 }) {
+  // no 2º turno não há lista de "aguardando divulgação" (a Wikipédia só anuncia as do 1º turno)
+  const { polls, pending } = turno === 2 ? { ...(await getPolls2()), pending: [] } : await getPolls();
   const today = todayBR();
   const withDay = polls.map((p) => ({ p, day: publishedOf(p, today) }));
   const latest = withDay.reduce((a, x) => (x.day > a ? x.day : a), "");
