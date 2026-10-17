@@ -152,5 +152,103 @@
     "flavio": 46,
     "indecisos": 1,
     "published": "2026-10-14"
+  },
+  {
+    "institute": "Palver",
+    "start": "2026-10-10",
+    "end": "2026-10-13",
+    "n": 5000,
+    "moe": 2.3,
+    "lula": 49,
+    "flavio": 50,
+    "indecisos": 1
+  },
+  {
+    "institute": "Indexa",
+    "start": "2026-10-13",
+    "end": "2026-10-14",
+    "n": 2000,
+    "moe": 2.2,
+    "lula": 42,
+    "flavio": 44,
+    "indecisos": null,
+    "published": "2026-10-15"
+  },
+  {
+    "institute": "Datafolha",
+    "start": "2026-10-13",
+    "end": "2026-10-15",
+    "n": 2520,
+    "moe": 2.0,
+    "lula": 45,
+    "flavio": 47,
+    "indecisos": null,
+    "published": "2026-10-15"
+  },
+  {
+    "institute": "PoderData",
+    "start": "2026-10-13",
+    "end": "2026-10-15",
+    "n": 3000,
+    "moe": 1.8,
+    "lula": 47,
+    "flavio": 47,
+    "indecisos": 2,
+    "published": "2026-10-16"
+  },
+  {
+    "institute": "CNT/MDA",
+    "start": "2026-10-13",
+    "end": "2026-10-15",
+    "n": 2014,
+    "moe": 2.2,
+    "lula": 45.9,
+    "flavio": 46.8,
+    "indecisos": 2.4,
+    "published": "2026-10-16"
+  },
+  {
+    "institute": "Futura",
+    "start": "2026-10-14",
+    "end": "2026-10-15",
+    "n": 2000,
+    "moe": 2.2,
+    "lula": 47.5,
+    "flavio": 49,
+    "indecisos": 2.1,
+    "published": "2026-10-16"
+  },
+  {
+    "institute": "Gerp",
+    "start": "2026-10-14",
+    "end": "2026-10-16",
+    "n": 2400,
+    "moe": 2.0,
+    "lula": 45,
+    "flavio": 50,
+    "indecisos": 3,
+    "published": "2026-10-16"
+  },
+  {
+    "institute": "Ipespe",
+    "start": "2026-10-13",
+    "end": "2026-10-15",
+    "n": 1500,
+    "moe": 2.6,
+    "lula": 46,
+    "flavio": 48,
+    "indecisos": null,
+    "published": "2026-10-17"
+  },
+  {
+    "institute": "Veritá",
+    "start": "2026-10-12",
+    "end": "2026-10-16",
+    "n": 15554,
+    "moe": 1.0,
+    "lula": 48.93,
+    "flavio": 51.07,
+    "indecisos": null,
+    "published": "2026-10-17"
   }
 ]
