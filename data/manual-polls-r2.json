@@ -250,5 +250,16 @@
     "flavio": 51.07,
     "indecisos": null,
     "published": "2026-10-17"
+  },
+  {
+    "institute": "Vox Brasil",
+    "start": "2026-10-15",
+    "end": "2026-10-17",
+    "n": 2100,
+    "moe": 2.15,
+    "lula": 46.4,
+    "flavio": 44.6,
+    "indecisos": 3.9,
+    "published": "2026-10-18"
   }
 ]
