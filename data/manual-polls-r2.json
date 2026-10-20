@@ -261,5 +261,38 @@
     "flavio": 44.6,
     "indecisos": 3.9,
     "published": "2026-10-18"
+  },
+  {
+    "institute": "AtlasIntel",
+    "start": "2026-10-13",
+    "end": "2026-10-18",
+    "n": 4998,
+    "moe": 1.0,
+    "lula": 47.6,
+    "flavio": 49.8,
+    "indecisos": null,
+    "published": "2026-10-19"
+  },
+  {
+    "institute": "Nexus",
+    "start": "2026-10-16",
+    "end": "2026-10-18",
+    "n": 2002,
+    "moe": 2.0,
+    "lula": 45.9,
+    "flavio": 46.5,
+    "indecisos": null,
+    "published": "2026-10-19"
+  },
+  {
+    "institute": "PoderData",
+    "start": "2026-10-16",
+    "end": "2026-10-18",
+    "n": 3000,
+    "moe": 1.8,
+    "lula": 46,
+    "flavio": 49,
+    "indecisos": 2,
+    "published": "2026-10-19"
   }
 ]
