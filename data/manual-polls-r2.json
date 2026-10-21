@@ -294,5 +294,38 @@
     "flavio": 49,
     "indecisos": 2,
     "published": "2026-10-19"
+  },
+  {
+    "institute": "Real Time Big Data",
+    "start": "2026-10-15",
+    "end": "2026-10-19",
+    "n": 2000,
+    "moe": 2.0,
+    "lula": 45,
+    "flavio": 48,
+    "indecisos": 2,
+    "published": "2026-10-20"
+  },
+  {
+    "institute": "Alfa Inteligência",
+    "start": "2026-10-15",
+    "end": "2026-10-19",
+    "n": 2700,
+    "moe": 1.9,
+    "lula": 45.9,
+    "flavio": 48.8,
+    "indecisos": null,
+    "published": "2026-10-20"
+  },
+  {
+    "institute": "Futura",
+    "start": "2026-10-16",
+    "end": "2026-10-17",
+    "n": 2000,
+    "moe": 2.2,
+    "lula": 49.6,
+    "flavio": 50.4,
+    "indecisos": null,
+    "published": "2026-10-19"
   }
 ]
