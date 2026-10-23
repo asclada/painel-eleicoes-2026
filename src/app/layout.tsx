@@ -18,7 +18,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <header className="sticky top-0 z-20 border-b border-line bg-[#0b1020]/85 backdrop-blur">
+        {/* no celular o cabeçalho rola junto (sobra tela); no computador fica fixo */}
+        <header className="z-20 border-b border-line bg-[#0b1020]/85 backdrop-blur md:sticky md:top-0">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3">
             <Link href="/" className="flex items-baseline gap-2">
               <span className="text-lg font-semibold tracking-tight">Eleição 2026</span>

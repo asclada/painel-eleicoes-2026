@@ -125,11 +125,12 @@ function expandGrid($: cheerio.CheerioAPI, el: Parameters<cheerio.CheerioAPI>[0]
 }
 
 /** Lula x Flávio no 2º turno: só a tabela da seção "2026" é baixada. */
-function parseRound2(html: string): Poll[] {
+function parseRound2(html: string): { polls: Poll[]; pending: Pending[] } {
   const $ = cheerio.load(html);
   $("sup, style, .mw-editsection").remove();
   $("br").replaceWith(" ");
   const polls: Poll[] = [];
+  const pending: Pending[] = [];
   const seen = new Set<string>();
   $("table.wikitable").each((_, el) => {
     const grid = expandGrid($, el);
@@ -144,7 +145,11 @@ function parseRound2(html: string): Poll[] {
       const lula = num(r[iL]);
       const flavio = num(r[iF]);
       const d = parseDates(r[1], 2026);
-      if (lula === null || flavio === null || !d) continue;
+      if (!d) continue;
+      if (lula === null || flavio === null) {
+        if (strip(r[iL].toLowerCase()).includes("ainda nao divulgado")) pending.push({ institute: instName(r[0]), end: d.end });
+        continue;
+      }
       const institute = instName(r[0]);
       const n = num(r[2]);
       const key = `${institute}|${d.end}|${n ?? 0}`;
@@ -157,7 +162,7 @@ function parseRound2(html: string): Poll[] {
       });
     }
   });
-  return polls;
+  return { polls, pending };
 }
 
 const MONTH_HEADINGS = new Set([
@@ -257,6 +262,7 @@ interface WikiFetch {
   polls: Poll[];
   pending: Pending[];
   polls2: Poll[] | null;
+  pending2: Pending[];
   at: number;
   key: string;
 }
@@ -306,8 +312,8 @@ async function fetchWikipedia(): Promise<WikiFetch> {
 
   const { polls, pending } = parseWikipedia(html1, true);
   if (polls.length < 40) throw new Error(`só ${polls.length} pesquisas lidas`);
-  const polls2 = html2 ? parseRound2(html2) : [];
-  return { polls, pending, polls2: polls2.length >= 20 ? polls2 : null, at: Date.now(), key };
+  const r2 = html2 ? parseRound2(html2) : { polls: [], pending: [] };
+  return { polls, pending, polls2: r2.polls.length >= 20 ? r2.polls : null, pending2: r2.pending, at: Date.now(), key };
 }
 
 const COLD_WAIT_MS = 8_000;
@@ -354,17 +360,21 @@ export function publishedOf(p: Poll, today = todayBR()) {
   return d > today ? today : d;
 }
 
+/** Anunciadas nos últimos 2 dias e ainda sem resultado (as mais antigas já saíram e a Wikipédia só não preencheu). */
+function freshPending(list: Pending[], merged: Poll[]) {
+  const have = new Set(merged.map((p) => `${p.institute}|${p.end}`));
+  const cutoff = addDays(todayBR(), -2);
+  // some se o instituto já tem pesquisa até 1 dia antes da anunciada (costuma ser a mesma, só repetida na tabela)
+  const covered = (x: Pending) => merged.some((p) => p.institute === x.institute && p.end >= addDays(x.end, -1));
+  return list.filter((x) => !have.has(`${x.institute}|${x.end}`) && !covered(x) && x.end >= cutoff);
+}
+
 export async function getPolls(): Promise<PollsResult> {
   const { data } = await loadWiki();
   const source: PollsResult["source"] = data ? "wikipedia" : "snapshot";
   const polls = data ? data.polls : (snapshot.polls as Poll[]).map((p) => ({ ...p, origin: "snapshot" as const }));
   const { merged, manualCount } = mergeManual(polls, manual as Poll[]);
-  const have = new Set(merged.map((p) => `${p.institute}|${p.end}`));
-  // só as anunciadas dos últimos 2 dias: as mais antigas já saíram e a Wikipédia só não preencheu
-  const cutoff = addDays(todayBR(), -2);
-  // some se o instituto já tem pesquisa até 1 dia antes da anunciada (costuma ser a mesma, só repetida na tabela)
-  const covered = (x: Pending) => merged.some((p) => p.institute === x.institute && p.end >= addDays(x.end, -1));
-  const pending = (data?.pending ?? []).filter((x) => !have.has(`${x.institute}|${x.end}`) && !covered(x) && x.end >= cutoff);
+  const pending = freshPending(data?.pending ?? [], merged);
   const version = hash(merged.map((p) => `${p.institute}${p.end}${p.n}${p.lula}${p.flavio}${p.cury}${p.caiado}${p.renan}${p.zema}`).join());
   return { polls: merged, source, fetchedAt: new Date(data?.at ?? Date.now()).toISOString(), manualCount, pending, version };
 }
@@ -374,8 +384,15 @@ export interface Polls2Result {
   source: "wikipedia" | "snapshot";
   fetchedAt: string;
   manualCount: number;
+  pending: Pending[];
   version: string;
 }
+
+/**
+ * Só entram pesquisas de 2º turno com campo terminado depois do 1º turno (04/10). As anteriores eram do tipo
+ * "se o 2º turno fosse hoje", feitas com a disputa ainda aberta (voto útil, indecisos, outros candidatos).
+ */
+export const R2_SINCE = "2026-10-05";
 
 function fillRound2(p: Partial<Poll>): Poll {
   return {
@@ -390,7 +407,9 @@ export async function getPolls2(): Promise<Polls2Result> {
   const { data } = await loadWiki();
   const live = data?.polls2 ?? null;
   const base = live ?? (snapshot2.polls as Partial<Poll>[]).map((p) => ({ ...fillRound2(p), origin: "snapshot" as const }));
-  const { merged, manualCount } = mergeManual(base, (manual2 as Partial<Poll>[]).map(fillRound2));
+  const { merged: all, manualCount } = mergeManual(base, (manual2 as Partial<Poll>[]).map(fillRound2));
+  const merged = all.filter((p) => p.end >= R2_SINCE);
+  const pending = freshPending(data?.pending2 ?? [], merged);
   const version = hash(merged.map((p) => `${p.institute}${p.end}${p.n}${p.lula}${p.flavio}`).join());
-  return { polls: merged, source: live ? "wikipedia" : "snapshot", fetchedAt: new Date(data?.at ?? Date.now()).toISOString(), manualCount, version };
+  return { polls: merged, source: live ? "wikipedia" : "snapshot", fetchedAt: new Date(data?.at ?? Date.now()).toISOString(), manualCount, pending, version };
 }

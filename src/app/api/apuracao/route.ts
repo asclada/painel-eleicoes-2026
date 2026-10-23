@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     if (env === "demo") {
       return Response.json(demoCount(Number(searchParams.get("p") ?? 0)), { headers });
     }
-    const data = await fetchTse(env === "simulado" ? "simulado" : "oficial");
+    const data = await fetchTse(env === "simulado" ? "simulado" : "oficial", 1);
     return Response.json(data, { headers });
   } catch (e) {
     return Response.json({ error: e instanceof Error ? e.message : "falha ao ler o TSE" }, { status: 502, headers });

@@ -45,6 +45,12 @@ body {
   border-radius: 16px;
 }
 
+/* card da projeção: tom violeta, para não confundir estimativa com a contagem real (azul-marinho) */
+.card-proj {
+  background: linear-gradient(180deg, #221c4d 0%, #17143a 100%);
+  border-color: rgb(167 139 250 / 0.45);
+}
+
 .num {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;

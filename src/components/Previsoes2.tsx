@@ -107,7 +107,7 @@ export async function Previsoes2({ corrPct }: { corrPct: number }) {
     <div className="space-y-6">
       <PageHeader
         title="Previsões · 2º turno"
-        subtitle={`Lula × Flávio Bolsonaro · 2º turno em 25/10 · votos válidos · ${e.general.nPolls} pesquisas dos últimos 90 dias`}
+        subtitle={`Lula × Flávio Bolsonaro · votação em 25/10 · votos válidos · ${e.general.nPolls} pesquisas feitas depois do 1º turno`}
         turno={2}
         basePath="/previsoes"
         keep={keep}
@@ -142,7 +142,7 @@ export async function Previsoes2({ corrPct }: { corrPct: number }) {
         {e.fcCerteiros && e.certeiros ? (
           <Card badge="B" title="Previsão com os institutos mais certeiros" subtitle={`${e.certeiros.nPolls} pesquisas de ${names}`} fc={e.fcCerteiros} corrPct={corrPct} />
         ) : (
-          <div className="card p-5 text-sm text-muted">Nenhum instituto com histórico de 2º turno publicou pesquisa nos últimos 90 dias.</div>
+          <div className="card p-5 text-sm text-muted">Nenhum instituto com histórico de 2º turno publicou pesquisa desde o 1º turno.</div>
         )}
       </div>
 

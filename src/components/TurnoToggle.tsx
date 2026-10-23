@@ -1,10 +1,21 @@
 import Link from "next/link";
 
 /** Botão 1º turno / 2º turno. É um link comum (a troca é feita no servidor): o 2º turno é o padrão e o 1º turno usa ?turno=1. */
-export function TurnoToggle({ basePath, turno, keep }: { basePath: string; turno: 1 | 2; keep?: Record<string, string | undefined> }) {
+export function TurnoToggle({
+  basePath,
+  turno,
+  keep,
+  defaultTurno = 2,
+}: {
+  basePath: string;
+  turno: 1 | 2;
+  keep?: Record<string, string | undefined>;
+  /** turno mostrado sem ?turno= na URL */
+  defaultTurno?: 1 | 2;
+}) {
   const href = (t: 1 | 2) => {
     const q = new URLSearchParams();
-    if (t === 1) q.set("turno", "1");
+    if (t !== defaultTurno) q.set("turno", String(t));
     for (const [k, v] of Object.entries(keep ?? {})) if (v) q.set(k, v);
     const s = q.toString();
     return s ? `${basePath}?${s}` : basePath;

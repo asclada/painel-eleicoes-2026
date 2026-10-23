@@ -1,8 +1,9 @@
-import { getPolls, getPolls2 } from "./polls";
+import { getPolls, getPolls2, R2_SINCE } from "./polls";
 import { aggregate, forecast, forecast2, pickReliable, todayBR, trackRecord, trendSeries, TOP_RELIABLE } from "./model";
 
 export const CORRECTIONS = [0, 20, 50] as const;
 export const DEFAULT_CORRECTION = 20;
+export const ELECTION_DAY_1 = "2026-10-04";
 
 /** Tudo que as telas precisam, calculado no servidor a partir das pesquisas mais recentes. */
 const memo1 = new Map<string, Promise<Estimates>>();
@@ -23,7 +24,8 @@ export async function getEstimates(corrPct: number = DEFAULT_CORRECTION): Promis
 
 async function compute1(r: Awaited<ReturnType<typeof getPolls>>, corrPct: number) {
   const { polls, source, fetchedAt, manualCount, pending } = r;
-  const asOf = todayBR();
+  // o 1º turno já foi votado: as contas ficam congeladas no dia da eleição
+  const asOf = todayBR() < ELECTION_DAY_1 ? todayBR() : ELECTION_DAY_1;
   const corr = corrPct / 100;
   const track = trackRecord();
   const reliable = pickReliable(polls, track, asOf, TOP_RELIABLE);
@@ -69,8 +71,10 @@ export async function getEstimates2(corrPct: number = DEFAULT_CORRECTION): Promi
 }
 
 async function compute2(r: Awaited<ReturnType<typeof getPolls2>>, corrPct: number) {
-  const { polls, source, fetchedAt, manualCount } = r;
+  const { polls, source, fetchedAt, manualCount, pending } = r;
   const asOf = todayBR();
+  // gráfico só desde o 1º turno, um ponto por dia
+  const days = Math.max(1, Math.round((Date.parse(asOf) - Date.parse(R2_SINCE)) / 86_400_000));
   const corr = corrPct / 100;
   const track = trackRecord(2);
   const reliable = pickReliable(polls, track, asOf, TOP_RELIABLE);
@@ -79,12 +83,12 @@ async function compute2(r: Awaited<ReturnType<typeof getPolls2>>, corrPct: numbe
   const certeiros = aggregate(polls, { asOf, only: reliable.only, instWeight });
   if (!general) throw new Error("Sem pesquisas de 2º turno suficientes na janela de 90 dias.");
   return {
-    asOf, source, fetchedAt, manualCount, totalPolls: polls.length, track, reliable: reliable.chosen, corrPct,
+    asOf, source, fetchedAt, manualCount, pending, totalPolls: polls.length, track, reliable: reliable.chosen, corrPct,
     general, certeiros,
     fcGeneral: forecast2(general, track, corr),
     fcCerteiros: certeiros ? forecast2(certeiros, track, corr) : null,
-    trendGeneral: trendSeries(polls, asOf),
-    trendCerteiros: trendSeries(polls, asOf, 90, 2, reliable.only, instWeight),
+    trendGeneral: trendSeries(polls, asOf, days, 1),
+    trendCerteiros: trendSeries(polls, asOf, days, 1, reliable.only, instWeight),
     polls,
   };
 }

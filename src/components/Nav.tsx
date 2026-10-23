@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const ITEMS = [
   { href: "/", label: "Pesquisas" },
   { href: "/previsoes", label: "Previsões" },
-  { href: "/apuracao", label: "Apuração ao vivo", live: true },
+  { href: "/apuracao", label: "Apuração ao vivo", short: "Apuração", live: true },
 ];
 
 export function Nav() {
@@ -20,12 +20,19 @@ export function Nav() {
             key={it.href}
             href={it.href}
             aria-current={active ? "page" : undefined}
-            className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 transition-colors ${
+            className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 transition-colors sm:gap-2 sm:px-3.5 ${
               active ? "bg-[#243059] text-white" : "text-muted hover:bg-[#18214a] hover:text-white"
             }`}
           >
             {it.live && <span className="live-dot inline-block h-2 w-2 rounded-full bg-[#f87171]" aria-hidden />}
-            {it.label}
+            {it.short ? (
+              <>
+                <span className="sm:hidden">{it.short}</span>
+                <span className="hidden sm:inline">{it.label}</span>
+              </>
+            ) : (
+              it.label
+            )}
           </Link>
         );
       })}

@@ -3,14 +3,27 @@ import type { CandKey, LiveCandidate, LiveCount, Shares } from "./types";
 import { UF_CODES } from "./ufs";
 
 /**
- * Arquivos públicos de resultado do TSE (presidente, Brasil). O arquivo "-u.json" já existe antes da
- * eleição (com votos zerados) e é atualizado durante a apuração. O ambiente "simulado" é o ensaio oficial
- * do TSE: serve para testar a leitura, mas os candidatos dele são fictícios.
+ * Arquivos públicos de resultado do TSE (presidente). O arquivo "-u.json" já existe antes da eleição (com votos
+ * zerados) e é atualizado durante a apuração. 1º turno = eleição 6257, 2º turno = 6258 (campo "cdt2" do
+ * arquivo de configuração do TSE). O ambiente "simulado" é o ensaio oficial do TSE (só 1º turno, candidatos fictícios).
  */
-export const TSE_URLS = {
-  oficial: "https://resultados.tse.jus.br/oficial/ele2026/6257/dados/br/br-c0001-e006257-u.json",
-  simulado: "https://resultados-sim.tse.jus.br/simulado/simulado2026/ele2026/21270/dados/br/br-c0001-e021270-u.json",
-} as const;
+export type Turno = 1 | 2;
+export const ELECTION: Record<Turno, string> = { 1: "6257", 2: "6258" };
+const OFICIAL = "https://resultados.tse.jus.br/oficial/ele2026";
+const SIMULADO = "https://resultados-sim.tse.jus.br/simulado/simulado2026/ele2026/21270";
+
+/** URL de um arquivo de resultado: `place` é "br", a UF ("ba"), município ("ba38490") ou zona ("ba38490-z0001"). */
+export function tseUrl(env: "oficial" | "simulado", turno: Turno, uf: string, place: string) {
+  if (env === "simulado") return `${SIMULADO}/dados/${uf}/${place}-c0001-e021270-u.json`;
+  const e = ELECTION[turno];
+  return `${OFICIAL}/${e}/dados/${uf}/${place}-c0001-e${e.padStart(6, "0")}-u.json`;
+}
+
+/** Andamento da apuração em cada município de uma UF (seções apuradas / total). */
+export const abUrl = (turno: Turno, uf: string) => {
+  const e = ELECTION[turno];
+  return `${OFICIAL}/${e}/dados/${uf}/${uf}-e${e.padStart(6, "0")}-ab.json`;
+};
 
 interface RawCand {
   n: string;
@@ -23,7 +36,7 @@ interface RawCand {
 interface RawFile {
   dg: string;
   hg: string;
-  s?: { pstn?: string; pst?: string };
+  s?: { pstn?: string; pst?: string; st?: string; ts?: string };
   v?: { vv?: string; vb?: string; vn?: string; tvn?: string };
   carg: { agr: { par: { sg: string; cand: RawCand[] }[] }[] }[];
 }
@@ -62,6 +75,7 @@ export function normalizeTse(raw: RawFile, env: "oficial" | "simulado"): LiveCou
     updatedAt: `${raw.dg} ${raw.hg}`,
     started: sumVotes > 0,
     pctSections: toNum(raw.s?.pstn ?? raw.s?.pst),
+    sections: { counted: toNum(raw.s?.st), total: toNum(raw.s?.ts) },
     validVotes,
     blank: toNum(raw.v?.vb),
     nulls: toNum(raw.v?.vn ?? raw.v?.tvn),
@@ -70,46 +84,43 @@ export function normalizeTse(raw: RawFile, env: "oficial" | "simulado"): LiveCou
   };
 }
 
-async function fetchJson(url: string): Promise<RawFile> {
+export async function fetchJson<T = RawFile>(url: string): Promise<T> {
   const res = await fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0 (compatible; eleicoes-2026-simulacao/1.0)", Accept: "application/json" },
     cache: "no-store",
+    signal: AbortSignal.timeout(10_000),
   });
   if (!res.ok) throw new Error(`TSE respondeu HTTP ${res.status}`);
   const buf = await res.arrayBuffer();
   // o TSE serve em UTF-8 às vezes e ISO-8859-1 outras: tenta UTF-8 e cai para latin1
   let txt = new TextDecoder("utf-8", { fatal: false }).decode(buf);
   if (txt.includes("�")) txt = new TextDecoder("iso-8859-1").decode(buf);
-  return JSON.parse(txt.replace(/^﻿/, "")) as RawFile;
+  return JSON.parse(txt.replace(/^﻿/, "")) as T;
 }
 
-export async function fetchTse(env: "oficial" | "simulado"): Promise<LiveCount> {
-  return normalizeTse(await fetchJson(TSE_URLS[env]), env);
+export async function fetchTse(env: "oficial" | "simulado", turno: Turno = 1): Promise<LiveCount> {
+  return normalizeTse(await fetchJson(tseUrl(env, turno, "br", "br")), env);
 }
 
-const ufUrl = (env: "oficial" | "simulado", uf: string) =>
-  env === "oficial"
-    ? `https://resultados.tse.jus.br/oficial/ele2026/6257/dados/${uf}/${uf}-c0001-e006257-u.json`
-    : `https://resultados-sim.tse.jus.br/simulado/simulado2026/ele2026/21270/dados/${uf}/${uf}-c0001-e021270-u.json`;
-
-const ufMemo: Partial<Record<"oficial" | "simulado", { at: number; data: Record<string, LiveCount | null> }>> = {};
+const ufMemo = new Map<string, { at: number; data: Record<string, LiveCount | null> }>();
 const UF_TTL_MS = 15_000;
 
 /** Contagem de cada estado (e exterior). Guarda 15 s em memória para vários acessos não multiplicarem as chamadas ao TSE. */
-export async function fetchAllUfs(env: "oficial" | "simulado"): Promise<Record<string, LiveCount | null>> {
-  const hit = ufMemo[env];
+export async function fetchAllUfs(env: "oficial" | "simulado", turno: Turno = 1): Promise<Record<string, LiveCount | null>> {
+  const key = `${env}${turno}`;
+  const hit = ufMemo.get(key);
   if (hit && Date.now() - hit.at < UF_TTL_MS) return hit.data;
   const entries = await Promise.all(
     UF_CODES.map(async (uf) => {
       try {
-        return [uf, normalizeTse(await fetchJson(ufUrl(env, uf)), env)] as const;
+        return [uf, normalizeTse(await fetchJson(tseUrl(env, turno, uf, uf)), env)] as const;
       } catch {
-        return [uf, null] as const;
+        return [uf, hit?.data[uf] ?? null] as const; // falhou: fica com a última leitura boa
       }
     }),
   );
   const data = Object.fromEntries(entries);
-  if (Object.values(data).some((v) => v)) ufMemo[env] = { at: Date.now(), data };
+  if (Object.values(data).some((v) => v)) ufMemo.set(key, { at: Date.now(), data });
   return data;
 }
 

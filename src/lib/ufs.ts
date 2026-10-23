@@ -39,3 +39,18 @@ export const UFS: Uf[] = [
 export const EXTERIOR = { code: "zz", sigla: "EXT", name: "Exterior" };
 
 export const UF_CODES = [...UFS.map((u) => u.code), EXTERIOR.code];
+
+export type RegionKey = "N" | "NE" | "CO" | "SE" | "S" | "EXT";
+
+export const REGIONS: { key: RegionKey; name: string; ufs: string[] }[] = [
+  { key: "NE", name: "Nordeste", ufs: ["ba", "pe", "ce", "ma", "pb", "pi", "rn", "al", "se"] },
+  { key: "SE", name: "Sudeste", ufs: ["sp", "mg", "rj", "es"] },
+  { key: "S", name: "Sul", ufs: ["pr", "rs", "sc"] },
+  { key: "N", name: "Norte", ufs: ["pa", "am", "ro", "to", "ac", "ap", "rr"] },
+  { key: "CO", name: "Centro-Oeste", ufs: ["go", "df", "mt", "ms"] },
+  { key: "EXT", name: "Exterior", ufs: ["zz"] },
+];
+
+export const REGION_OF: Record<string, RegionKey> = Object.fromEntries(REGIONS.flatMap((r) => r.ufs.map((u) => [u, r.key])));
+
+export const UF_NAME: Record<string, string> = Object.fromEntries([...UFS, EXTERIOR].map((u) => [u.code, u.name]));

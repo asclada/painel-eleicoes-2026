@@ -6,9 +6,8 @@ import { mae, SERIES_COLORS, type LiveSource } from "@/lib/compare";
 import { dec, int, pct } from "@/lib/format";
 import type { CandKey, LiveCount, Shares } from "@/lib/types";
 import { useFetchLoop } from "@/lib/useFetchLoop";
-import { BrazilMap, type UfCounts } from "./BrazilMap";
 import { CandidateAvatar } from "./CandidateAvatar";
-import { UfTable } from "./UfTable";
+import { StatesPanel, type UfCounts } from "./StatesPanel";
 
 type Env = "oficial" | "simulado" | "demo";
 interface Trace {
@@ -103,7 +102,7 @@ export function ApuracaoLive({ env, sources }: { env: Env; sources: LiveSource[]
           </div>
         </div>
         <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#1c2650]" role="progressbar" aria-valuenow={data?.pctSections ?? 0} aria-valuemin={0} aria-valuemax={100} aria-label="Seções apuradas">
-          <div className="h-full rounded-full bg-[#a78bfa] transition-all duration-700" style={{ width: `${data?.pctSections ?? 0}%` }} />
+          <div className="h-full rounded-full bg-[#cbd5e1] transition-all duration-700" style={{ width: `${data?.pctSections ?? 0}%` }} />
         </div>
 
         {err && (
@@ -162,14 +161,11 @@ export function ApuracaoLive({ env, sources }: { env: Env; sources: LiveSource[]
 
       <section className="card p-5">
         <h2 className="text-base font-semibold">Estado a estado</h2>
-        <p className="mb-4 mt-1 text-sm text-muted">Quem está na frente em cada estado, conforme as urnas entram. Atualiza a cada {UF_REFRESH_MS / 1000} segundos.</p>
+        <p className="mb-4 mt-1 text-sm text-muted">Toque num estado ou abra uma região para ver quanto foi apurado e quem liderou entre Lula e Flávio.</p>
         {!ufs ? (
           <p className="rounded-lg border border-line bg-[#0f1630] p-3 text-sm text-muted">Carregando os estados…</p>
         ) : (
-          <div className="grid gap-6 lg:grid-cols-2">
-            <BrazilMap counts={ufs} />
-            <UfTable counts={ufs} />
-          </div>
+          <StatesPanel counts={ufs} note="Percentuais só entre Lula e Flávio (os dois que foram ao 2º turno)." />
         )}
       </section>
 

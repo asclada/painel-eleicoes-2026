@@ -81,6 +81,8 @@ export interface LiveCount {
   updatedAt: string;
   started: boolean;
   pctSections: number;
+  /** seções apuradas / total (para somar regiões) */
+  sections?: { counted: number; total: number };
   validVotes: number;
   blank: number;
   nulls: number;

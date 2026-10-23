@@ -225,7 +225,7 @@ export function pickReliable(polls: Poll[], track: TrackRecord, asOf: string, to
 // ---------------------------------------------------------------------------------------------
 // Previsão: média -> (correção opcional do viés histórico) -> incerteza -> 20 mil simulações
 // ---------------------------------------------------------------------------------------------
-function mulberry32(seed: number) {
+export function mulberry32(seed: number) {
   let a = seed >>> 0;
   return () => {
     a = (a + 0x6d2b79f5) >>> 0;
@@ -235,7 +235,7 @@ function mulberry32(seed: number) {
   };
 }
 
-function gauss(rnd: () => number) {
+export function gauss(rnd: () => number) {
   const u = Math.max(rnd(), 1e-12);
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rnd());
 }

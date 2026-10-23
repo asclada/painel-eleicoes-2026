@@ -1,6 +1,6 @@
 # Eleição 2026 · Simulação
 
-Painel pessoal para acompanhar a eleição presidencial de 2026: pesquisas em votos válidos, previsões e apuração ao vivo do 1º turno (04/10/2026), com comparação entre a contagem real e o que as pesquisas/previsões apontavam.
+Painel pessoal para acompanhar a eleição presidencial de 2026: pesquisas em votos válidos, previsões e apuração ao vivo do 1º turno (04/10/2026) e do 2º turno (25/10/2026), com projeção do resultado final durante a contagem e comparação com o que as pesquisas/previsões apontavam.
 
 **Site no ar:** https://painel-eleicoes-2026.vercel.app
 
@@ -20,20 +20,20 @@ Painel pessoal para acompanhar a eleição presidencial de 2026: pesquisas em vo
 ## Stack
 
 - **Site:** Next.js 16 (App Router), TypeScript e Tailwind CSS v4, hospedado na Vercel. Sem banco de dados: a Wikipédia (pesquisas) e o TSE (apuração) são lidos no servidor, com cache.
-- **Cálculos:** média ponderada das pesquisas, nota de acerto dos institutos em 2018 e 2022 e previsão com 20 mil simulações, tudo em TypeScript (`src/lib/model.ts`).
-- **Python (scripts de apoio):** `scripts/build_data.py` monta a base histórica a partir da Wikipédia e `scripts/gen_brazil_map.py` gera o mapa dos estados a partir da malha do IBGE. Rodam na máquina de quem desenvolve, não fazem parte do site em produção.
+- **Cálculos:** média ponderada das pesquisas, nota de acerto dos institutos em 2018 e 2022 e previsão com 20 mil simulações (`src/lib/model.ts`); projeção ao vivo do 2º turno por zona eleitoral e município (`src/lib/projection.ts`). Tudo em TypeScript.
+- **Python (scripts de apoio):** `scripts/build_data.py` monta a base histórica a partir da Wikipédia, `scripts/build_base_r1.py` baixa do TSE o resultado do 1º turno de 2026 por município e zona (base da projeção) e `scripts/gen_brazil_map.py` gera o mapa dos estados a partir da malha do IBGE. Rodam na máquina de quem desenvolve, não fazem parte do site em produção.
 
 Projeto pessoal, sem vínculo com nenhum instituto de pesquisa, partido ou campanha.
 
 ## Telas
 
-Três telas (Pesquisas e Previsões abrem no **2º turno** (Lula × Flávio) e têm o botão **1º turno / 2º turno**; o 1º turno usa `?turno=1`; a apuração é só do 1º turno):
+Três telas, todas abrem no **2º turno** (Lula × Flávio) e têm o botão **1º turno / 2º turno**; o 1º turno usa `?turno=1`. Feitas primeiro para celular.
 
 | Rota | O que mostra |
 |---|---|
 | `/` | Média A (todas as pesquisas dos últimos 90 dias) e média B (só os institutos que mais acertaram em 2018 e 2022), evolução da média, ranking de acerto histórico, tabela de todas as pesquisas usadas. |
 | `/previsoes` | Previsão A e B: votos válidos projetados com faixa de 90%, chance de liderar, de vencer no 1º turno, de haver 2º turno e de cada candidato ir ao 2º turno. Chave de correção do viés histórico (0%, 20% padrão, 50%). |
-| `/apuracao` | Contagem do TSE (atualiza a cada 20 s), % de seções apuradas, mapa do Brasil e tabela estado a estado (quem lidera em cada UF), tabela contagem × pesquisas × previsões, ranking de quem está mais perto e gráfico do erro ao longo da apuração. |
+| `/apuracao` | **2º turno:** contagem do TSE (atualiza a cada 20 s) com faixa fixa no topo, projeção do resultado final com margem e chance de vencer, gráfico contagem × projeção, mapa em que se toca no estado, regiões recolhíveis com % apurado e quem lidera, e pesquisas × projeção. **1º turno (`?turno=1`):** resultado oficial, mapa e regiões, contagem × pesquisas × previsões e o erro de cada leitura. |
 
 Candidatos acompanhados: Lula, Flávio Bolsonaro, Ronaldo Caiado, Augusto Cury, Renan Santos e Romeu Zema (os demais entram em "Demais").
 
@@ -46,8 +46,11 @@ npm run dev        # http://localhost:3000
 
 Modos de teste da apuração (não dependem de a eleição ter começado):
 
-- `/apuracao?env=demo`: simulação com números inventados e um controle de "% apurado".
-- `/apuracao?env=simulado`: lê o ambiente de ensaio do TSE (candidatos fictícios), para testar a conexão.
+- `/apuracao?env=demo`: 2º turno inventado, contado na ordem real em que os municípios fecharam no 1º turno, com um controle de "% apurado" e o resultado final sorteado (para conferir a projeção).
+- `/apuracao?turno=1&env=demo`: simulação do 1º turno com números inventados.
+- `/apuracao?turno=1&env=simulado`: lê o ambiente de ensaio do TSE (candidatos fictícios), para testar a conexão.
+
+Para abrir o `npm run dev` pelo celular na mesma rede, use `http://<IP do computador>:3000` (os endereços `192.168.x.x` estão liberados em `next.config.ts`).
 
 ## Como as pesquisas se atualizam
 
@@ -71,7 +74,7 @@ A Wikipédia pode demorar para registrar uma pesquisa nova. Nesse caso, adicione
 
 Use os nomes de instituto já existentes (`Datafolha`, `Quaest`, `AtlasIntel`, `Futura`, `Gerp`, `PoderData`, `CNT/MDA`, `Veritá`, `Nexus`, `Ideia`, `Real Time Big Data`, `Palver`, `Indexa`, `Vox Brasil`, `DataTrends`...) para o histórico de acerto ser aplicado.
 
-As pesquisas de 2º turno (Lula × Flávio) seguem o mesmo esquema, em `data/manual-polls-r2.json`, com `lula` e `flavio` em % do total de entrevistados.
+As pesquisas de 2º turno (Lula × Flávio) seguem o mesmo esquema, em `data/manual-polls-r2.json`, com `lula` e `flavio` em % do total de entrevistados. Só entram as com campo terminado a partir de 05/10 (depois do 1º turno).
 
 Para refazer as cópias salvas (`data/polls2026.json`, `data/polls2026_r2.json`) e os dados históricos de 1º e 2º turno de 2018/2022 (`data/history.json`) a partir da Wikipédia:
 
@@ -89,19 +92,23 @@ Detalhes na seção "Como calculamos" das telas.
 - **Votos válidos**: cada pesquisa é normalizada pela soma dos candidatos (sem branco, nulo e indecisos).
 - **Média**: peso por recência (meia-vida de 7 dias), margem de erro (0,5× a 2×) e amortecimento para institutos com muitas pesquisas (÷√n).
 - **Institutos certeiros**: erro da última pesquisa antes do 1º turno de 2018 e 2022 contra o resultado do TSE, nos 4 mais votados (os 2 primeiros valem o dobro). 2022 pesa 2, 2018 pesa 1, com encolhimento para a média quando só há uma eleição. Média B = melhores 6 institutos ativos, ponderados por 1/nota².
-- **2º turno**: mesma receita só com Lula × Flávio; o histórico usa o 2º turno de 2018 e 2022, e a chance de vencer é a parte de uma curva normal acima de 50%.
+- **2º turno**: mesma receita só com Lula × Flávio e só com pesquisas feitas depois do 1º turno; o histórico usa o 2º turno de 2018 e 2022, e a chance de vencer é a parte de uma curva normal acima de 50%.
+- **Projeção ao vivo (2º turno)**: o ponto de partida de cada lugar é o voto dele no 1º turno de 2026 (zona eleitoral nas 190 cidades com mais de uma zona, município no resto), com os votos dos outros candidatos divididos para bater com as pesquisas. A diferença medida no que já foi apurado é aplicada ao que falta, encolhida zona → estado → região → Brasil quando há pouco apurado; antes da 1ª urna, vale a Previsão A. Assim a ordem da contagem (Sul antes do Nordeste, um bairro antes do outro) não engana a projeção. Testada em 150 apurações simuladas: a faixa de 90% acertou cerca de 90% das vezes no cenário pessimista.
 - **Previsão**: média + fração do viés histórico; incerteza = erro histórico + discordância entre institutos; 20 mil simulações com os dois líderes correlacionados negativamente (−0,25).
 
 Limites: só duas eleições de referência, vários institutos novos sem histórico, e pesquisa é retrato do momento, não previsão.
 
 ## Apuração do TSE
 
-Arquivo público lido no servidor (`src/lib/tse.ts`, rota `/api/apuracao`), porque o TSE não libera CORS para o navegador:
+Arquivos públicos lidos no servidor (`src/lib/tse.ts`), porque o TSE não libera CORS para o navegador. Eleição 6257 = 1º turno, 6258 = 2º turno:
 
-- Oficial: `https://resultados.tse.jus.br/oficial/ele2026/6257/dados/br/br-c0001-e006257-u.json`
-- Simulado: `https://resultados-sim.tse.jus.br/simulado/simulado2026/ele2026/21270/dados/br/br-c0001-e021270-u.json`
+- Brasil: `https://resultados.tse.jus.br/oficial/ele2026/6258/dados/br/br-c0001-e006258-u.json`
+- Estados: `.../dados/<uf>/<uf>-c0001-e006258-u.json` (e `zz` para o exterior)
+- Andamento de cada município: `.../dados/<uf>/<uf>-e006258-ab.json`
+- Zonas das cidades grandes: `.../dados/<uf>/<uf><município>-z<zona>-c0001-e006258-u.json`
+- Simulado (só 1º turno): `https://resultados-sim.tse.jus.br/simulado/simulado2026/ele2026/21270/dados/br/br-c0001-e021270-u.json`
 
-Os estados vêm de `.../dados/<uf>/<uf>-c0001-e006257-u.json` (e `zz` para o exterior), lidos pela rota `/api/apuracao/uf` com cache de 15 s. Os candidatos são reconhecidos pelo número da urna (13, 22, 55, 70, 14, 30).
+Rotas: `/api/apuracao/r2` (2º turno: tudo acima + projeção, guardado 15 s e atualizado em segundo plano), `/api/apuracao` e `/api/apuracao/uf` (1º turno). Os candidatos são reconhecidos pelo número da urna (13, 22, 55, 70, 14, 30).
 
 ## Deploy (Vercel)
 
@@ -111,7 +118,7 @@ vercel login
 vercel --prod
 ```
 
-`vercel.json` fixa a região de execução em `gru1` (São Paulo). Depois do deploy, abra `/api/apuracao` para confirmar que o servidor consegue ler o TSE.
+`vercel.json` fixa a região de execução em `gru1` (São Paulo). Depois do deploy, abra `/apuracao` (aquece o cache) e `/api/apuracao/r2` para confirmar que o servidor consegue ler o TSE.
 
 ## Licença
 

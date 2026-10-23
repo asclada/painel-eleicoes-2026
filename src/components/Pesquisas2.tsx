@@ -1,6 +1,7 @@
 import { getEstimates2 } from "@/lib/estimates";
 import { dec, dmy, int, pct } from "@/lib/format";
-import { HALF_LIFE_DAYS, validShares, WINDOW_DAYS } from "@/lib/model";
+import { HALF_LIFE_DAYS, validShares } from "@/lib/model";
+import { R2_SINCE } from "@/lib/polls";
 import { BY_KEY } from "@/lib/candidates";
 import { CandidateAvatar } from "./CandidateAvatar";
 import { Gap, SharesCard } from "./SharesCard";
@@ -17,7 +18,7 @@ const byLead = (s: { lula: number; flavio: number }) => (s.lula >= s.flavio ? [.
 /** Pesquisas de 2º turno (Lula x Flávio): mesma estrutura da tela do 1º turno. */
 export async function Pesquisas2() {
   const e = await getEstimates2();
-  const from = new Date(Date.parse(`${e.asOf}T12:00:00Z`) - WINDOW_DAYS * 86_400_000).toISOString().slice(0, 10);
+  const from = R2_SINCE;
   const names = e.reliable.map((r) => r.institute);
   const inB = new Set(names);
   const dots = e.polls.flatMap((p) => {
@@ -29,18 +30,13 @@ export async function Pesquisas2() {
     <div className="space-y-6">
       <PageHeader
         title="Pesquisas · 2º turno"
-        subtitle={`Lula × Flávio Bolsonaro · votos válidos · pesquisas de 2º turno dos últimos ${WINDOW_DAYS} dias · 2º turno em 25/10`}
+        subtitle={`Lula × Flávio Bolsonaro · votos válidos · pesquisas feitas depois do 1º turno (desde ${dmy(R2_SINCE)}) · votação em 25/10`}
         turno={2}
         basePath="/"
         source={e.source}
       />
 
       <PollsStrip turno={2} />
-
-      <div className="card p-3 text-sm text-muted">
-        O 2º turno é Lula × Flávio Bolsonaro, em 25/10. As pesquisas feitas antes do 1º turno (04/10) eram do tipo “se o 2º turno fosse hoje” e perdem peso
-        com o tempo; as feitas depois, já com os dois definidos, pesam mais automaticamente.
-      </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <SharesCard
@@ -71,13 +67,13 @@ export async function Pesquisas2() {
             }
           />
         ) : (
-          <div className="card p-5 text-sm text-muted">Nenhum instituto com histórico de 2º turno publicou pesquisa nos últimos {WINDOW_DAYS} dias.</div>
+          <div className="card p-5 text-sm text-muted">Nenhum instituto com histórico de 2º turno publicou pesquisa desde o 1º turno.</div>
         )}
       </div>
 
       <section className="card p-5">
         <h2 className="text-base font-semibold">Evolução da média</h2>
-        <p className="mb-3 mt-1 text-sm text-muted">Lula e Flávio no 2º turno, em votos válidos, nos últimos {WINDOW_DAYS} dias.</p>
+        <p className="mb-3 mt-1 text-sm text-muted">Lula e Flávio no 2º turno, em votos válidos, desde o 1º turno.</p>
         <Trend general={e.trendGeneral} certeiros={e.trendCerteiros} dots={dots} from={from} to={e.asOf} />
       </section>
 
@@ -131,7 +127,7 @@ export async function Pesquisas2() {
       <section className="card p-5">
         <h2 className="text-base font-semibold">Todas as pesquisas usadas</h2>
         <p className="mb-3 mt-1 text-sm text-muted">
-          {e.general.rows.length} pesquisas de 2º turno nos últimos {WINDOW_DAYS} dias, em votos válidos, da mais recente para a mais antiga. “Peso” é a fatia de cada uma na média A.
+          {e.general.rows.length} pesquisas de 2º turno feitas depois do 1º turno, em votos válidos, da mais recente para a mais antiga. “Peso” é a fatia de cada uma na média A.
         </p>
         <div className="scroll-x">
           <table className="w-full min-w-[560px] text-sm">
