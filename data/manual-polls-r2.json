@@ -338,5 +338,48 @@
     "flavio": 45,
     "indecisos": 2,
     "published": "2026-10-21"
+  },
+  {
+    "institute": "Ideia",
+    "start": "2026-10-15",
+    "end": "2026-10-19",
+    "n": 1500,
+    "moe": 2.5,
+    "lula": 46,
+    "flavio": 48,
+    "indecisos": null,
+    "published": "2026-10-21"
+  },
+  {
+    "institute": "DataTrends",
+    "start": "2026-10-15",
+    "end": "2026-10-17",
+    "n": null,
+    "moe": 2.19,
+    "lula": 48.5,
+    "flavio": 51.5,
+    "indecisos": null
+  },
+  {
+    "institute": "Datafolha",
+    "start": "2026-10-20",
+    "end": "2026-10-22",
+    "n": 2520,
+    "moe": 2.0,
+    "lula": 46,
+    "flavio": 47,
+    "indecisos": 2,
+    "published": "2026-10-22"
+  },
+  {
+    "institute": "PoderData",
+    "start": "2026-10-19",
+    "end": "2026-10-21",
+    "n": 4000,
+    "moe": 1.6,
+    "lula": 48,
+    "flavio": 49,
+    "indecisos": null,
+    "published": "2026-10-22"
   }
 ]
