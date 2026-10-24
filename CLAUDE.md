@@ -46,6 +46,6 @@ Painel pessoal (Lucas e o pai) para acompanhar a eleição presidencial de 2026:
 ## Pendente / próximos passos
 - Depois de 25/10: conferir a projeção contra o resultado e decidir o que fazer com o painel.
 
-Última atualização: 23/10/2026 (apuração do 2º turno com projeção).
+Última atualização: 23/10/2026 (apuração do 2º turno com projeção). Pesquisas de 2º turno: a cópia da Wikipédia (`data/polls2026_r2.json`) já traz tudo até 23/10; `data/manual-polls-r2.json` só serve para o que a Wikipédia ainda não registrou e, para não contar em dobro, o `end` de cada entrada manual tem de ser igual ao da Wikipédia (corrigida a Datafolha de 6-8/10, que estava com fim em 07/10). Rotina diária de pesquisas ativa, presa à sessão do Claude que a criou (21h47 de Brasília, até 25/10).
 
 Registro de 22/10: pesquisas de 2º turno de 05 a 22/10 lançadas à mão em `data/manual-polls-r2.json`, a partir de textos de imprensa; últimas: Datafolha (campo 20-22/10) e PoderData/Aya (19-21/10, n=4.000 só numa fonte), divulgadas em 22/10; Meio/Ideia (15-19/10, divulgada em 21/10); DataTrends (15-17/10, só votos válidos, vindo do agregador do Poder360, sem n nem dia de divulgação); Quaest/Globo pós-debate de 21/10; Palver 10-13/10 sem dia de divulgação confirmado; conferir com a Wikipédia quando ela atualizar. Próximas esperadas: últimas rodadas até sábado 24/10 (Quaest, AtlasIntel, Nexus, Gerp, Ipespe etc.). Rotina diária ativa, presa à sessão do Claude que a criou (21h47 de Brasília, até 25/10).
