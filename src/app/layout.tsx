@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
+import { OnlineCount } from "@/components/OnlineCount";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Pesquisas retratam o momento em que foram feitas e não são previsão de resultado. Fontes: pesquisas registradas
           no TSE (via Wikipédia), resultados históricos do TSE (2018 e 2022) e apuração do TSE
           (resultados.tse.jus.br). Projeto pessoal, sem vínculo com nenhum instituto ou campanha.
+          <OnlineCount />
         </footer>
       </body>
     </html>
