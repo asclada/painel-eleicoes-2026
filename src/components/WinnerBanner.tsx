@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CandidateAvatar } from "./CandidateAvatar";
+import { BannerPhoto } from "./BannerPhoto";
 
 /** Faixa do resultado do 2º turno (25/10/2026). Os números ficam na apuração, que lê o TSE. */
 export function WinnerBanner() {
@@ -9,9 +9,7 @@ export function WinnerBanner() {
       aria-label="Resultado da eleição"
     >
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-8 text-center sm:flex-row sm:gap-8 sm:py-10 sm:text-left">
-        <span className="rounded-full ring-4 ring-white/80">
-          <CandidateAvatar k="lula" size={112} />
-        </span>
+        <BannerPhoto />
         <div className="flex-1">
           <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">2º turno · 25 de outubro de 2026</div>
           <h2 className="mt-2 text-4xl font-black leading-none tracking-tight sm:text-6xl">Lula reeleito</h2>
