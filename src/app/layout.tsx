@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { OnlineCount } from "@/components/OnlineCount";
+import { WinnerBanner } from "@/components/WinnerBanner";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Nav />
           </div>
         </header>
+        <WinnerBanner />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
         <footer className="mx-auto w-full max-w-6xl px-4 pb-10 pt-4 text-xs leading-relaxed text-faint">
           Pesquisas retratam o momento em que foram feitas e não são previsão de resultado. Fontes: pesquisas registradas
